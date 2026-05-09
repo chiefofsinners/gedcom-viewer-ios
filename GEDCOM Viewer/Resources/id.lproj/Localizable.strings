@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "OKE";
+"general.done" = "Selesai";
+"general.close" = "Tutup";
+
+/* Tab titles */
+"tab.home.title" = "Beranda";
+"tab.index.title" = "Indeks";
+"tab.family.title" = "Keluarga";
+
+/* Alerts */
+"alert.import_failure.title" = "Tidak dapat membuka berkas";
+
+/* Home tab */
+"home.header.title" = "Pilih berkas GEDCOM";
+"home.header.subtitle" = "Pilih berkas GEDCOM lokal untuk menelusuri silsilah keluarganya.";
+"home.action.browse" = "Telusuri berkas";
+"home.action.load_sample" = "Muat data sampel";
+"home.action.settings" = "Pengaturan";
+
+/* Settings */
+"settings.title" = "Pengaturan";
+"settings.sections.appearance" = "Tampilan";
+"settings.theme.label" = "Tema";
+"settings.theme.option_accessibility" = "Tema %@";
+
+/* Theme names */
+"theme.earth" = "Bumi";
+"theme.silver" = "Perak";
+
+/* Index tab */
+"index.search.placeholder" = "Cari berdasarkan nama";
+"index.search.clear_accessibility" = "Hapus teks pencarian";
+"index.placeholder.empty_results" = "Tidak ditemukan individu.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "Tidak ada data GEDCOM dimuat. Pilih berkas dari Beranda.";
+"placeholder.no_data" = "Tidak ada data GEDCOM tersedia.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "Memuat data GEDCOM…";
+"family.placeholder.select_from_home" = "Pilih berkas GEDCOM dari tab Beranda untuk melihat detail keluarga.";
+"family.placeholder.no_individuals" = "Tidak ada individu tersedia dalam data GEDCOM ini.";
+"family.placeholder.select_from_index" = "Pilih individu dari indeks untuk melihat koneksinya.";
+
+/* Family view copy */
+"family.error.not_found" = "Individu tidak ditemukan.";
+"family.accessibility.individual_details" = "Detail individu";
+"family.section.parents" = "Orang tua";
+"family.section.family" = "Keluarga";
+"family.label.father" = "Ayah";
+"family.label.mother" = "Ibu";
+"family.label.individual" = "Individu";
+"family.label.spouse" = "Pasangan";
+"family.label.married" = "Menikah";
+"family.message.no_parents" = "Tidak ada orang tua yang tercatat.";
+"family.message.no_children" = "Tidak ada anak yang tercatat.";
+
+/* Person summaries */
+"person.unknown_name" = "Tidak Dikenal";
+"person.birth_summary" = "Lahir: %@";
+"person.death_summary" = "Meninggal: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "Detail individu";
+"individual.info.none" = "Tidak ada informasi tambahan tersedia.";
+"individual.notes.additional" = "Catatan tambahan";
+"individual.notes.title" = "Catatan";
+"individual.section.summary" = "Ringkasan";
+"individual.section.timeline" = "Garis waktu";
+"individual.summary.full_name" = "Nama lengkap";
+"individual.summary.given_name" = "Nama depan";
+"individual.summary.surname" = "Nama belakang";
+"individual.summary.gender" = "Jenis kelamin";
+"individual.gender.male" = "Laki-laki";
+"individual.gender.female" = "Perempuan";
+"individual.gender.unknown" = "Tidak diketahui";
+"individual.detail.date" = "Tanggal";
+"individual.detail.place" = "Tempat";
+"individual.detail.address" = "Alamat";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "Tidak ada berkas yang dipilih";
+"open.status.sample_loaded" = "Data sampel dimuat dari bundel";
+"open.status.file_loaded" = "Berkas dimuat dari penyimpanan perangkat";
+"open.status.prompt" = "Pilih berkas untuk memulai";
+"open.section.current_selection" = "Pilihan saat ini";
+"open.section.status" = "Status";
+"open.section.actions" = "Tindakan";
+"open.action.reload" = "Muat ulang berkas saat ini";
+"open.action.clear" = "Hapus pilihan";
+
+/* Error copy */
+"error.sample.load_failed" = "Tidak dapat memuat data sampel.";
+"error.sample.missing_file" = "Berkas sampel GEDCOM yang dibundel hilang.";
+"error.access.unable_to_access_file" = "Tidak dapat mengakses berkas GEDCOM yang dipilih sebelumnya.";
+"error.provider.unavailable" = "Berkas saat ini tidak tersedia dari penyedianya. Jadikan tersedia secara offline di aplikasi penyedia, lalu coba lagi.";
+"error.unsupported_file_type" = "Jenis berkas tidak didukung. Pilih berkas GEDCOM (.ged).";
+"error.load.generic" = "Tidak dapat memuat berkas GEDCOM.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "Tidak dapat mendekode berkas GEDCOM menggunakan set karakter yang dideklarasikan.";
+"individual.name.unnamed" = "Tanpa Nama";
+
+/* Event labels */
+"event.birth" = "Kelahiran";
+"event.death" = "Kematian";
+"event.baptism" = "Baptisan";
+"event.christening" = "Pembaptisan Anak";
+"event.adult_christening" = "Pembaptisan Dewasa";
+"event.residence" = "Tempat Tinggal";
+"event.occupation" = "Pekerjaan";
+"event.burial" = "Pemakaman";
+"event.graduation" = "Kelulusan";
+"event.education" = "Pendidikan";
+"event.event" = "Acara";
+"event.marriage" = "Pernikahan";
+
+/* Event detail labels */
+"event.detail.cause" = "Penyebab";
+"event.detail.type" = "Jenis";
+"event.detail.agency" = "Agen";
+"event.detail.religion" = "Agama";

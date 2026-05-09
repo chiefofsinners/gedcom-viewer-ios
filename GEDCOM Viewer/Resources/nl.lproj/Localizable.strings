@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "OK";
+"general.done" = "Gereed";
+"general.close" = "Sluiten";
+
+/* Tab titles */
+"tab.home.title" = "Home";
+"tab.index.title" = "Index";
+"tab.family.title" = "Familie";
+
+/* Alerts */
+"alert.import_failure.title" = "Kan bestand niet openen";
+
+/* Home tab */
+"home.header.title" = "Selecteer een GEDCOM-bestand";
+"home.header.subtitle" = "Kies een lokaal GEDCOM-bestand om de stamboom te bekijken.";
+"home.action.browse" = "Blader door bestanden";
+"home.action.load_sample" = "Voorbeeldgegevens laden";
+"home.action.settings" = "Instellingen";
+
+/* Settings */
+"settings.title" = "Instellingen";
+"settings.sections.appearance" = "Weergave";
+"settings.theme.label" = "Thema";
+"settings.theme.option_accessibility" = "%@-thema";
+
+/* Theme names */
+"theme.earth" = "Aarde";
+"theme.silver" = "Zilver";
+
+/* Index tab */
+"index.search.placeholder" = "Zoek op naam";
+"index.search.clear_accessibility" = "Zoektekst wissen";
+"index.placeholder.empty_results" = "Geen personen gevonden.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "Geen GEDCOM-gegevens geladen. Kies een bestand bij Home.";
+"placeholder.no_data" = "Geen GEDCOM-gegevens beschikbaar.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "GEDCOM-gegevens worden geladen…";
+"family.placeholder.select_from_home" = "Kies een GEDCOM-bestand in de Home-tab om familiedetails te bekijken.";
+"family.placeholder.no_individuals" = "Geen personen beschikbaar in deze GEDCOM-gegevens.";
+"family.placeholder.select_from_index" = "Selecteer een persoon uit de index om verbindingen te bekijken.";
+
+/* Family view copy */
+"family.error.not_found" = "Persoon niet gevonden.";
+"family.accessibility.individual_details" = "Persoonsgegevens";
+"family.section.parents" = "Ouders";
+"family.section.family" = "Familie";
+"family.label.father" = "Vader";
+"family.label.mother" = "Moeder";
+"family.label.individual" = "Persoon";
+"family.label.spouse" = "Partner";
+"family.label.married" = "Getrouwd";
+"family.message.no_parents" = "Geen geregistreerde ouders.";
+"family.message.no_children" = "Geen geregistreerde kinderen.";
+
+/* Person summaries */
+"person.unknown_name" = "Onbekend";
+"person.birth_summary" = "Geboren: %@";
+"person.death_summary" = "Overleden: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "Persoonsdetails";
+"individual.info.none" = "Geen aanvullende informatie beschikbaar.";
+"individual.notes.additional" = "Aanvullende notities";
+"individual.notes.title" = "Notities";
+"individual.section.summary" = "Overzicht";
+"individual.section.timeline" = "Tijdlijn";
+"individual.summary.full_name" = "Volledige naam";
+"individual.summary.given_name" = "Voornaam";
+"individual.summary.surname" = "Achternaam";
+"individual.summary.gender" = "Geslacht";
+"individual.gender.male" = "Man";
+"individual.gender.female" = "Vrouw";
+"individual.gender.unknown" = "Onbekend";
+"individual.detail.date" = "Datum";
+"individual.detail.place" = "Plaats";
+"individual.detail.address" = "Adres";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "Geen bestand geselecteerd";
+"open.status.sample_loaded" = "Voorbeeldgegevens geladen vanuit bundel";
+"open.status.file_loaded" = "Bestand geladen uit apparaatopslag";
+"open.status.prompt" = "Selecteer een bestand om te beginnen";
+"open.section.current_selection" = "Huidige selectie";
+"open.section.status" = "Status";
+"open.section.actions" = "Acties";
+"open.action.reload" = "Huidig bestand opnieuw laden";
+"open.action.clear" = "Selectie wissen";
+
+/* Error copy */
+"error.sample.load_failed" = "Kan voorbeeldgegevens niet laden.";
+"error.sample.missing_file" = "Het meegeleverde voorbeeldbestand ontbreekt.";
+"error.access.unable_to_access_file" = "Kan het eerder geselecteerde GEDCOM-bestand niet openen.";
+"error.provider.unavailable" = "Het bestand is momenteel niet beschikbaar bij de aanbieder. Maak het offline beschikbaar in de app van de aanbieder en probeer het opnieuw.";
+"error.unsupported_file_type" = "Niet-ondersteund bestandstype. Kies een GEDCOM-bestand (.ged).";
+"error.load.generic" = "Kan GEDCOM-bestand niet laden.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "Kan het GEDCOM-bestand niet decoderen met de opgegeven tekenset.";
+"individual.name.unnamed" = "Naamloos";
+
+/* Event labels */
+"event.birth" = "Geboorte";
+"event.death" = "Overlijden";
+"event.baptism" = "Doop";
+"event.christening" = "Doopsel";
+"event.adult_christening" = "Volwassenendoop";
+"event.residence" = "Woonplaats";
+"event.occupation" = "Beroep";
+"event.burial" = "Begrafenis";
+"event.graduation" = "Afstuderen";
+"event.education" = "Opleiding";
+"event.event" = "Gebeurtenis";
+"event.marriage" = "Huwelijk";
+
+/* Event detail labels */
+"event.detail.cause" = "Oorzaak";
+"event.detail.type" = "Type";
+"event.detail.agency" = "Instantie";
+"event.detail.religion" = "Religie";

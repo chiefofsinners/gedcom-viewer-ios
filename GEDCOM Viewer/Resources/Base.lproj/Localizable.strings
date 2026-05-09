@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "OK";
+"general.done" = "Done";
+"general.close" = "Close";
+
+/* Tab titles */
+"tab.home.title" = "Home";
+"tab.index.title" = "Index";
+"tab.family.title" = "Family";
+
+/* Alerts */
+"alert.import_failure.title" = "Unable to open file";
+
+/* Home tab */
+"home.header.title" = "Select a GEDCOM file";
+"home.header.subtitle" = "Choose a local GEDCOM file to browse its family tree.";
+"home.action.browse" = "Browse files";
+"home.action.load_sample" = "Load sample data";
+"home.action.settings" = "Settings";
+
+/* Settings */
+"settings.title" = "Settings";
+"settings.sections.appearance" = "Appearance";
+"settings.theme.label" = "Theme";
+"settings.theme.option_accessibility" = "%@ theme";
+
+/* Theme names */
+"theme.earth" = "Earth";
+"theme.silver" = "Silver";
+
+/* Index tab */
+"index.search.placeholder" = "Search by name";
+"index.search.clear_accessibility" = "Clear search text";
+"index.placeholder.empty_results" = "No individuals found.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "No GEDCOM data loaded. Choose a file from Home.";
+"placeholder.no_data" = "No GEDCOM data available.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "Loading GEDCOM data…";
+"family.placeholder.select_from_home" = "Choose a GEDCOM file from the Home tab to explore family details.";
+"family.placeholder.no_individuals" = "No individuals available in this GEDCOM data.";
+"family.placeholder.select_from_index" = "Please select an individual from the index to view their connections.";
+
+/* Family view copy */
+"family.error.not_found" = "Individual not found.";
+"family.accessibility.individual_details" = "Individual details";
+"family.section.parents" = "Parents";
+"family.section.family" = "Family";
+"family.label.father" = "Father";
+"family.label.mother" = "Mother";
+"family.label.individual" = "Individual";
+"family.label.spouse" = "Spouse";
+"family.label.married" = "Married";
+"family.message.no_parents" = "No recorded parents.";
+"family.message.no_children" = "No recorded children.";
+
+/* Person summaries */
+"person.unknown_name" = "Unknown";
+"person.birth_summary" = "Born: %@";
+"person.death_summary" = "Died: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "Individual details";
+"individual.info.none" = "No additional information available.";
+"individual.notes.additional" = "Additional notes";
+"individual.notes.title" = "Notes";
+"individual.section.summary" = "Summary";
+"individual.section.timeline" = "Timeline";
+"individual.summary.full_name" = "Full name";
+"individual.summary.given_name" = "Given name";
+"individual.summary.surname" = "Surname";
+"individual.summary.gender" = "Gender";
+"individual.gender.male" = "Male";
+"individual.gender.female" = "Female";
+"individual.gender.unknown" = "Unknown";
+"individual.detail.date" = "Date";
+"individual.detail.place" = "Place";
+"individual.detail.address" = "Address";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "No file selected";
+"open.status.sample_loaded" = "Sample data loaded from bundle";
+"open.status.file_loaded" = "File loaded from device storage";
+"open.status.prompt" = "Select a file to begin";
+"open.section.current_selection" = "Current selection";
+"open.section.status" = "Status";
+"open.section.actions" = "Actions";
+"open.action.reload" = "Reload current file";
+"open.action.clear" = "Clear selection";
+
+/* Error copy */
+"error.sample.load_failed" = "Unable to load sample data.";
+"error.sample.missing_file" = "The bundled sample GEDCOM file is missing.";
+"error.access.unable_to_access_file" = "Unable to access the previously selected GEDCOM file.";
+"error.provider.unavailable" = "The file is not currently available from its provider. Make it available offline in the provider app, then try again.";
+"error.unsupported_file_type" = "Unsupported file type. Please choose a GEDCOM (.ged) file.";
+"error.load.generic" = "Unable to load GEDCOM file.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "Unable to decode the GEDCOM file using the declared character set.";
+"individual.name.unnamed" = "Unnamed";
+
+/* Event labels */
+"event.birth" = "Birth";
+"event.death" = "Death";
+"event.baptism" = "Baptism";
+"event.christening" = "Christening";
+"event.adult_christening" = "Adult Christening";
+"event.residence" = "Residence";
+"event.occupation" = "Occupation";
+"event.burial" = "Burial";
+"event.graduation" = "Graduation";
+"event.education" = "Education";
+"event.event" = "Event";
+"event.marriage" = "Marriage";
+
+/* Event detail labels */
+"event.detail.cause" = "Cause";
+"event.detail.type" = "Type";
+"event.detail.agency" = "Agency";
+"event.detail.religion" = "Religion";

@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "Yayi";
+"general.done" = "An Gama";
+"general.close" = "Rufe";
+
+/* Tab titles */
+"tab.home.title" = "Gida";
+"tab.index.title" = "Fihirisa";
+"tab.family.title" = "Iyali";
+
+/* Alerts */
+"alert.import_failure.title" = "Kasa buɗe fayil";
+
+/* Home tab */
+"home.header.title" = "Zaɓi fayil ɗin GEDCOM";
+"home.header.subtitle" = "Zaɓi fayil ɗin GEDCOM na gida don bincika itacen danginsa.";
+"home.action.browse" = "Bincika fayiloli";
+"home.action.load_sample" = "Ɗora bayanan samfuri";
+"home.action.settings" = "Saituna";
+
+/* Settings */
+"settings.title" = "Saituna";
+"settings.sections.appearance" = "Bayyana";
+"settings.theme.label" = "Jigo";
+"settings.theme.option_accessibility" = "Jigo %@";
+
+/* Theme names */
+"theme.earth" = "Kasa";
+"theme.silver" = "Azurfa";
+
+/* Index tab */
+"index.search.placeholder" = "Bincika da suna";
+"index.search.clear_accessibility" = "Share rubutun bincike";
+"index.placeholder.empty_results" = "Ba a sami mutum ba.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "Ba a ɗora bayanan GEDCOM ba. Zaɓi fayil daga Gida.";
+"placeholder.no_data" = "Babu bayanan GEDCOM da ke akwai.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "Ana ɗora bayanan GEDCOM…";
+"family.placeholder.select_from_home" = "Zaɓi fayil ɗin GEDCOM daga shafin Gida don gano cikakkun bayanan iyali.";
+"family.placeholder.no_individuals" = "Babu mutane da ke akwai a cikin wannan bayanan GEDCOM.";
+"family.placeholder.select_from_index" = "Da fatan za a zaɓi mutum daga fihirisa don ganin dangantakarsu.";
+
+/* Family view copy */
+"family.error.not_found" = "Ba a sami mutum ba.";
+"family.accessibility.individual_details" = "Cikakkun bayanan mutum";
+"family.section.parents" = "Iyayen";
+"family.section.family" = "Iyali";
+"family.label.father" = "Uba";
+"family.label.mother" = "Uwa";
+"family.label.individual" = "Mutum";
+"family.label.spouse" = "Ma’aurata";
+"family.label.married" = "Aure";
+"family.message.no_parents" = "Ba a rubuta iyaye ba.";
+"family.message.no_children" = "Ba a rubuta yara ba.";
+
+/* Person summaries */
+"person.unknown_name" = "Ba a Sani ba";
+"person.birth_summary" = "An haife shi: %@";
+"person.death_summary" = "Ya mutu: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "Cikakkun bayanan mutum";
+"individual.info.none" = "Babu ƙarin bayani da ke akwai.";
+"individual.notes.additional" = "Ƙarin bayanan kula";
+"individual.notes.title" = "Bayanan kula";
+"individual.section.summary" = "Taƙaitawa";
+"individual.section.timeline" = "Lokaci";
+"individual.summary.full_name" = "Cikakken suna";
+"individual.summary.given_name" = "Sunan da aka ba";
+"individual.summary.surname" = "Sunan mahaifi";
+"individual.summary.gender" = "Jinsi";
+"individual.gender.male" = "Namiji";
+"individual.gender.female" = "Mace";
+"individual.gender.unknown" = "Ba a Sani ba";
+"individual.detail.date" = "Kwanan wata";
+"individual.detail.place" = "Wuri";
+"individual.detail.address" = "Adireshi";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "Ba a zaɓi fayil ba";
+"open.status.sample_loaded" = "An ɗora bayanan samfuri daga kunshin";
+"open.status.file_loaded" = "An ɗora fayil daga ma'ajiyar na'urar";
+"open.status.prompt" = "Zaɓi fayil don farawa";
+"open.section.current_selection" = "Zaɓin yanzu";
+"open.section.status" = "Matsayi";
+"open.section.actions" = "Ayyuka";
+"open.action.reload" = "Sake ɗora fayil ɗin yanzu";
+"open.action.clear" = "Share zaɓi";
+
+/* Error copy */
+"error.sample.load_failed" = "Kasa ɗora bayanan samfuri.";
+"error.sample.missing_file" = "Fayil ɗin GEDCOM na samfuri da aka haɗa ya ɓace.";
+"error.access.unable_to_access_file" = "Kasa samun damar fayil ɗin GEDCOM da aka zaɓa a baya.";
+"error.provider.unavailable" = "Fayil ɗin a halin yanzu ba ya samuwa daga mai ba da shi. Sa shi ya kasance a shirye a layi aikin mai bayarwa, sannan a sake gwadawa.";
+"error.unsupported_file_type" = "Nau'in fayil ɗin da ba a tallafa ba. Da fatan za a zaɓi fayil ɗin GEDCOM (.ged).";
+"error.load.generic" = "Kasa ɗora fayil ɗin GEDCOM.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "Kasa warware fayil ɗin GEDCOM ta amfani da saitin haruffa da aka bayyana.";
+"individual.name.unnamed" = "Ba a ba suna ba";
+
+/* Event labels */
+"event.birth" = "Haihuwa";
+"event.death" = "Mutuwa";
+"event.baptism" = "Bafuloti";
+"event.christening" = "Bafuloti (na yaro)";
+"event.adult_christening" = "Bafuloti (na babba)";
+"event.residence" = "Mazauni";
+"event.occupation" = "Aiki";
+"event.burial" = "Binnewa";
+"event.graduation" = "Digiri";
+"event.education" = "Ilimi";
+"event.event" = "Abin da ya faru";
+"event.marriage" = "Aure";
+
+/* Event detail labels */
+"event.detail.cause" = "Dalili";
+"event.detail.type" = "Nau'i";
+"event.detail.agency" = "Hukuma";
+"event.detail.religion" = "Addini";

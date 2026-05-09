@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "OK";
+"general.done" = "Готово";
+"general.close" = "Закрити";
+
+/* Tab titles */
+"tab.home.title" = "Головна";
+"tab.index.title" = "Індекс";
+"tab.family.title" = "Родина";
+
+/* Alerts */
+"alert.import_failure.title" = "Не вдалося відкрити файл";
+
+/* Home tab */
+"home.header.title" = "Виберіть файл GEDCOM";
+"home.header.subtitle" = "Оберіть локальний файл GEDCOM, щоб переглянути свій родовід.";
+"home.action.browse" = "Переглянути файли";
+"home.action.load_sample" = "Завантажити приклад";
+"home.action.settings" = "Налаштування";
+
+/* Settings */
+"settings.title" = "Налаштування";
+"settings.sections.appearance" = "Вигляд";
+"settings.theme.label" = "Тема";
+"settings.theme.option_accessibility" = "Тема %@";
+
+/* Theme names */
+"theme.earth" = "Земля";
+"theme.silver" = "Срібло";
+
+/* Index tab */
+"index.search.placeholder" = "Пошук за ім'ям";
+"index.search.clear_accessibility" = "Очистити текст пошуку";
+"index.placeholder.empty_results" = "Осіб не знайдено.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "Дані GEDCOM не завантажені. Виберіть файл на вкладці Головна.";
+"placeholder.no_data" = "Дані GEDCOM відсутні.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "Завантаження даних GEDCOM…";
+"family.placeholder.select_from_home" = "Оберіть файл GEDCOM на вкладці Головна, щоб переглянути інформацію про родину.";
+"family.placeholder.no_individuals" = "У цих даних GEDCOM немає осіб.";
+"family.placeholder.select_from_index" = "Виберіть особу з індексу, щоб переглянути зв'язки.";
+
+/* Family view copy */
+"family.error.not_found" = "Особу не знайдено.";
+"family.accessibility.individual_details" = "Деталі особи";
+"family.section.parents" = "Батьки";
+"family.section.family" = "Родина";
+"family.label.father" = "Батько";
+"family.label.mother" = "Мати";
+"family.label.individual" = "Особa";
+"family.label.spouse" = "Подружжя";
+"family.label.married" = "Одружені";
+"family.message.no_parents" = "Немає записаних батьків.";
+"family.message.no_children" = "Немає записаних дітей.";
+
+/* Person summaries */
+"person.unknown_name" = "Невідомо";
+"person.birth_summary" = "Народився/лася: %@";
+"person.death_summary" = "Помер/ла: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "Деталі особи";
+"individual.info.none" = "Немає додаткової інформації.";
+"individual.notes.additional" = "Додаткові нотатки";
+"individual.notes.title" = "Нотатки";
+"individual.section.summary" = "Зведення";
+"individual.section.timeline" = "Хронологія";
+"individual.summary.full_name" = "Повне ім'я";
+"individual.summary.given_name" = "Ім'я";
+"individual.summary.surname" = "Прізвище";
+"individual.summary.gender" = "Стать";
+"individual.gender.male" = "Чоловіча";
+"individual.gender.female" = "Жіноча";
+"individual.gender.unknown" = "Невідомо";
+"individual.detail.date" = "Дата";
+"individual.detail.place" = "Місце";
+"individual.detail.address" = "Адреса";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "Файл не вибрано";
+"open.status.sample_loaded" = "Приклад даних завантажено з пакета";
+"open.status.file_loaded" = "Файл завантажено з пам'яті пристрою";
+"open.status.prompt" = "Виберіть файл, щоб почати";
+"open.section.current_selection" = "Поточний вибір";
+"open.section.status" = "Статус";
+"open.section.actions" = "Дії";
+"open.action.reload" = "Перезавантажити поточний файл";
+"open.action.clear" = "Очистити вибір";
+
+/* Error copy */
+"error.sample.load_failed" = "Не вдалося завантажити приклад.";
+"error.sample.missing_file" = "У комплекті відсутній файл з прикладом.";
+"error.access.unable_to_access_file" = "Не вдається отримати доступ до раніше вибраного файлу GEDCOM.";
+"error.provider.unavailable" = "Файл наразі недоступний у сервісі. Зробіть його доступним офлайн у відповідному застосунку та повторіть спробу.";
+"error.unsupported_file_type" = "Непідтримуваний тип файлу. Виберіть файл GEDCOM (.ged).";
+"error.load.generic" = "Не вдалося завантажити файл GEDCOM.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "Не вдалося декодувати файл GEDCOM у вказаному кодуванні.";
+"individual.name.unnamed" = "Без назви";
+
+/* Event labels */
+"event.birth" = "Народження";
+"event.death" = "Смерть";
+"event.baptism" = "Хрещення";
+"event.christening" = "Охрещення";
+"event.adult_christening" = "Хрещення дорослих";
+"event.residence" = "Місце проживання";
+"event.occupation" = "Професія";
+"event.burial" = "Поховання";
+"event.graduation" = "Випуск";
+"event.education" = "Освіта";
+"event.event" = "Подія";
+"event.marriage" = "Шлюб";
+
+/* Event detail labels */
+"event.detail.cause" = "Причина";
+"event.detail.type" = "Тип";
+"event.detail.agency" = "Установа";
+"event.detail.religion" = "Релігія";

@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "V redu";
+"general.done" = "Končano";
+"general.close" = "Zapri";
+
+/* Tab titles */
+"tab.home.title" = "Domov";
+"tab.index.title" = "Indeks";
+"tab.family.title" = "Družina";
+
+/* Alerts */
+"alert.import_failure.title" = "Datoteke ni mogoče odpreti";
+
+/* Home tab */
+"home.header.title" = "Izberite datoteko GEDCOM";
+"home.header.subtitle" = "Izberite lokalno datoteko GEDCOM in si oglejte družinsko drevo.";
+"home.action.browse" = "Prebrskaj datoteke";
+"home.action.load_sample" = "Naloži primer";
+"home.action.settings" = "Nastavitve";
+
+/* Settings */
+"settings.title" = "Nastavitve";
+"settings.sections.appearance" = "Videz";
+"settings.theme.label" = "Tema";
+"settings.theme.option_accessibility" = "Tema %@";
+
+/* Theme names */
+"theme.earth" = "Zemlja";
+"theme.silver" = "Srebro";
+
+/* Index tab */
+"index.search.placeholder" = "Išči po imenu";
+"index.search.clear_accessibility" = "Počisti iskalno besedilo";
+"index.placeholder.empty_results" = "Ni najdenih oseb.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "Ni naloženih podatkov GEDCOM. Izberite datoteko na zavihku Domov.";
+"placeholder.no_data" = "Podatki GEDCOM niso na voljo.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "Nalaganje podatkov GEDCOM …";
+"family.placeholder.select_from_home" = "Izberite datoteko GEDCOM na zavihku Domov za ogled podrobnosti o družini.";
+"family.placeholder.no_individuals" = "V teh podatkih GEDCOM ni oseb.";
+"family.placeholder.select_from_index" = "Izberite osebo iz indeksa, da prikažete povezave.";
+
+/* Family view copy */
+"family.error.not_found" = "Osebe ni mogoče najti.";
+"family.accessibility.individual_details" = "Podrobnosti osebe";
+"family.section.parents" = "Starši";
+"family.section.family" = "Družina";
+"family.label.father" = "Oče";
+"family.label.mother" = "Mati";
+"family.label.individual" = "Oseba";
+"family.label.spouse" = "Zakonec";
+"family.label.married" = "Poročena";
+"family.message.no_parents" = "Ni zabeleženih staršev.";
+"family.message.no_children" = "Ni zabeleženih otrok.";
+
+/* Person summaries */
+"person.unknown_name" = "Neznano";
+"person.birth_summary" = "Rojen/a: %@";
+"person.death_summary" = "Umrl/a: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "Podrobnosti o osebi";
+"individual.info.none" = "Ni dodatnih informacij.";
+"individual.notes.additional" = "Dodatne opombe";
+"individual.notes.title" = "Opombe";
+"individual.section.summary" = "Povzetek";
+"individual.section.timeline" = "Časovnica";
+"individual.summary.full_name" = "Polno ime";
+"individual.summary.given_name" = "Ime";
+"individual.summary.surname" = "Priimek";
+"individual.summary.gender" = "Spol";
+"individual.gender.male" = "Moški";
+"individual.gender.female" = "Ženski";
+"individual.gender.unknown" = "Neznano";
+"individual.detail.date" = "Datum";
+"individual.detail.place" = "Kraj";
+"individual.detail.address" = "Naslov";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "Ni izbrane datoteke";
+"open.status.sample_loaded" = "Primer podatkov je naložen iz paketa";
+"open.status.file_loaded" = "Datoteka je naložena iz shrambe naprave";
+"open.status.prompt" = "Izberite datoteko za začetek";
+"open.section.current_selection" = "Trenutna izbira";
+"open.section.status" = "Status";
+"open.section.actions" = "Dejanja";
+"open.action.reload" = "Znova naloži trenutno datoteko";
+"open.action.clear" = "Počisti izbiro";
+
+/* Error copy */
+"error.sample.load_failed" = "Primer podatkov ni mogoče naložiti.";
+"error.sample.missing_file" = "Priložena vzorčna datoteka manjka.";
+"error.access.unable_to_access_file" = "Ni mogoče dostopati do prej izbrane datoteke GEDCOM.";
+"error.provider.unavailable" = "Datoteka trenutno ni na voljo pri ponudniku. V aplikaciji ponudnika jo naredite dostopno brez povezave in poskusite znova.";
+"error.unsupported_file_type" = "Nepodprt tip datoteke. Izberite datoteko GEDCOM (.ged).";
+"error.load.generic" = "Datoteke GEDCOM ni mogoče naložiti.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "Datoteke GEDCOM ni mogoče dekodirati z navedenim naborom znakov.";
+"individual.name.unnamed" = "Neimenovano";
+
+/* Event labels */
+"event.birth" = "Rojstvo";
+"event.death" = "Smrt";
+"event.baptism" = "Krst";
+"event.christening" = "Krstni obred";
+"event.adult_christening" = "Krst odraslih";
+"event.residence" = "Bivališče";
+"event.occupation" = "Poklic";
+"event.burial" = "Pogreb";
+"event.graduation" = "Diploma";
+"event.education" = "Izobrazba";
+"event.event" = "Dogodek";
+"event.marriage" = "Poročitev";
+
+/* Event detail labels */
+"event.detail.cause" = "Vzrok";
+"event.detail.type" = "Vrsta";
+"event.detail.agency" = "Ustanova";
+"event.detail.religion" = "Vera";

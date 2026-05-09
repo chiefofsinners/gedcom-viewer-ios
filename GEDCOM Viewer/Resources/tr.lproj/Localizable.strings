@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "Tamam";
+"general.done" = "Bitti";
+"general.close" = "Kapat";
+
+/* Tab titles */
+"tab.home.title" = "Anasayfa";
+"tab.index.title" = "Dizin";
+"tab.family.title" = "Aile";
+
+/* Alerts */
+"alert.import_failure.title" = "Dosya açılamıyor";
+
+/* Home tab */
+"home.header.title" = "Bir GEDCOM dosyası seçin";
+"home.header.subtitle" = "Aile ağacını incelemek için yerel bir GEDCOM dosyası seçin.";
+"home.action.browse" = "Dosyalara Göz At";
+"home.action.load_sample" = "Örnek Veri Yükle";
+"home.action.settings" = "Ayarlar";
+
+/* Settings */
+"settings.title" = "Ayarlar";
+"settings.sections.appearance" = "Görünüm";
+"settings.theme.label" = "Tema";
+"settings.theme.option_accessibility" = "%@ teması";
+
+/* Theme names */
+"theme.earth" = "Toprak";
+"theme.silver" = "Gümüş";
+
+/* Index tab */
+"index.search.placeholder" = "Ada göre ara";
+"index.search.clear_accessibility" = "Arama metnini temizle";
+"index.placeholder.empty_results" = "Hiçbir kişi bulunamadı.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "GEDCOM verisi yüklenmedi. Anasayfa'dan bir dosya seçin.";
+"placeholder.no_data" = "Kullanılabilir GEDCOM verisi yok.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "GEDCOM verisi yükleniyor…";
+"family.placeholder.select_from_home" = "Aile detaylarını keşfetmek için Anasayfa sekmesinden bir GEDCOM dosyası seçin.";
+"family.placeholder.no_individuals" = "Bu GEDCOM verisinde kullanılabilir kişi yok.";
+"family.placeholder.select_from_index" = "Bağlantılarını görmek için lütfen dizinden bir kişi seçin.";
+
+/* Family view copy */
+"family.error.not_found" = "Kişi bulunamadı.";
+"family.accessibility.individual_details" = "Kişi detayları";
+"family.section.parents" = "Ebeveynler";
+"family.section.family" = "Aile";
+"family.label.father" = "Baba";
+"family.label.mother" = "Anne";
+"family.label.individual" = "Kişi";
+"family.label.spouse" = "Eş";
+"family.label.married" = "Evli";
+"family.message.no_parents" = "Kayıtlı ebeveyn yok.";
+"family.message.no_children" = "Kayıtlı çocuk yok.";
+
+/* Person summaries */
+"person.unknown_name" = "Bilinmiyor";
+"person.birth_summary" = "Doğum: %@";
+"person.death_summary" = "Ölüm: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "Kişi detayları";
+"individual.info.none" = "Ek bilgi mevcut değil.";
+"individual.notes.additional" = "Ek notlar";
+"individual.notes.title" = "Notlar";
+"individual.section.summary" = "Özet";
+"individual.section.timeline" = "Zaman Çizelgesi";
+"individual.summary.full_name" = "Tam ad";
+"individual.summary.given_name" = "Ad";
+"individual.summary.surname" = "Soyad";
+"individual.summary.gender" = "Cinsiyet";
+"individual.gender.male" = "Erkek";
+"individual.gender.female" = "Kadın";
+"individual.gender.unknown" = "Bilinmiyor";
+"individual.detail.date" = "Tarih";
+"individual.detail.place" = "Yer";
+"individual.detail.address" = "Adres";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "Hiçbir dosya seçilmedi";
+"open.status.sample_loaded" = "Paketten örnek veri yüklendi";
+"open.status.file_loaded" = "Dosya cihaz depolamasından yüklendi";
+"open.status.prompt" = "Başlamak için bir dosya seçin";
+"open.section.current_selection" = "Mevcut seçim";
+"open.section.status" = "Durum";
+"open.section.actions" = "Eylemler";
+"open.action.reload" = "Mevcut dosyayı yeniden yükle";
+"open.action.clear" = "Seçimi temizle";
+
+/* Error copy */
+"error.sample.load_failed" = "Örnek veri yüklenemedi.";
+"error.sample.missing_file" = "Paket içerisindeki örnek GEDCOM dosyası eksik.";
+"error.access.unable_to_access_file" = "Daha önce seçilen GEDCOM dosyasına erişilemiyor.";
+"error.provider.unavailable" = "Dosya şu anda sağlayıcısından mevcut değil. Lütfen sağlayıcı uygulamasında çevrimdışı kullanılabilir hale getirin, ardından tekrar deneyin.";
+"error.unsupported_file_type" = "Desteklenmeyen dosya türü. Lütfen bir GEDCOM (.ged) dosyası seçin.";
+"error.load.generic" = "GEDCOM dosyası yüklenemedi.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "Belirtilen karakter seti kullanılarak GEDCOM dosyasının kodu çözülemiyor.";
+"individual.name.unnamed" = "İsimsiz";
+
+/* Event labels */
+"event.birth" = "Doğum";
+"event.death" = "Ölüm";
+"event.baptism" = "Vaftiz";
+"event.christening" = "Hristiyan Adı Verme";
+"event.adult_christening" = "Yetişkin Vaftizi";
+"event.residence" = "İkamet";
+"event.occupation" = "Meslek";
+"event.burial" = "Defin";
+"event.graduation" = "Mezuniyet";
+"event.education" = "Eğitim";
+"event.event" = "Olay";
+"event.marriage" = "Evlilik";
+
+/* Event detail labels */
+"event.detail.cause" = "Neden";
+"event.detail.type" = "Tür";
+"event.detail.agency" = "Ajans";
+"event.detail.religion" = "Din";

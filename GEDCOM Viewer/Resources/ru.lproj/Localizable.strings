@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "ОК";
+"general.done" = "Готово";
+"general.close" = "Закрыть";
+
+/* Tab titles */
+"tab.home.title" = "Главная";
+"tab.index.title" = "Индекс";
+"tab.family.title" = "Семья";
+
+/* Alerts */
+"alert.import_failure.title" = "Невозможно открыть файл";
+
+/* Home tab */
+"home.header.title" = "Выберите файл GEDCOM";
+"home.header.subtitle" = "Выберите локальный файл GEDCOM, чтобы просмотреть его генеалогическое дерево.";
+"home.action.browse" = "Обзор файлов";
+"home.action.load_sample" = "Загрузить образец данных";
+"home.action.settings" = "Настройки";
+
+/* Settings */
+"settings.title" = "Настройки";
+"settings.sections.appearance" = "Внешний вид";
+"settings.theme.label" = "Тема";
+"settings.theme.option_accessibility" = "Тема %@";
+
+/* Theme names */
+"theme.earth" = "Земля";
+"theme.silver" = "Серебро";
+
+/* Index tab */
+"index.search.placeholder" = "Поиск по имени";
+"index.search.clear_accessibility" = "Очистить текст поиска";
+"index.placeholder.empty_results" = "Личности не найдены.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "Данные GEDCOM не загружены. Выберите файл на вкладке «Главная».";
+"placeholder.no_data" = "Нет доступных данных GEDCOM.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "Загрузка данных GEDCOM…";
+"family.placeholder.select_from_home" = "Выберите файл GEDCOM на вкладке «Главная», чтобы изучить детали семьи.";
+"family.placeholder.no_individuals" = "В этих данных GEDCOM нет доступных личностей.";
+"family.placeholder.select_from_index" = "Пожалуйста, выберите личность из индекса, чтобы просмотреть ее связи.";
+
+/* Family view copy */
+"family.error.not_found" = "Личность не найдена.";
+"family.accessibility.individual_details" = "Подробности о личности";
+"family.section.parents" = "Родители";
+"family.section.family" = "Семья";
+"family.label.father" = "Отец";
+"family.label.mother" = "Мать";
+"family.label.individual" = "Личность";
+"family.label.spouse" = "Супруг(а)";
+"family.label.married" = "Женат/Замужем";
+"family.message.no_parents" = "Родители не записаны.";
+"family.message.no_children" = "Дети не записаны.";
+
+/* Person summaries */
+"person.unknown_name" = "Неизвестно";
+"person.birth_summary" = "Рождение: %@";
+"person.death_summary" = "Смерть: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "Подробности о личности";
+"individual.info.none" = "Дополнительная информация отсутствует.";
+"individual.notes.additional" = "Дополнительные заметки";
+"individual.notes.title" = "Заметки";
+"individual.section.summary" = "Сводка";
+"individual.section.timeline" = "Хронология";
+"individual.summary.full_name" = "Полное имя";
+"individual.summary.given_name" = "Имя";
+"individual.summary.surname" = "Фамилия";
+"individual.summary.gender" = "Пол";
+"individual.gender.male" = "Мужской";
+"individual.gender.female" = "Женский";
+"individual.gender.unknown" = "Неизвестно";
+"individual.detail.date" = "Дата";
+"individual.detail.place" = "Место";
+"individual.detail.address" = "Адрес";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "Файл не выбран";
+"open.status.sample_loaded" = "Образец данных загружен из пакета";
+"open.status.file_loaded" = "Файл загружен из хранилища устройства";
+"open.status.prompt" = "Выберите файл, чтобы начать";
+"open.section.current_selection" = "Текущий выбор";
+"open.section.status" = "Статус";
+"open.section.actions" = "Действия";
+"open.action.reload" = "Перезагрузить текущий файл";
+"open.action.clear" = "Очистить выбор";
+
+/* Error copy */
+"error.sample.load_failed" = "Невозможно загрузить образец данных.";
+"error.sample.missing_file" = "Отсутствует bundled-файл GEDCOM с образцом данных.";
+"error.access.unable_to_access_file" = "Невозможно получить доступ к ранее выбранному файлу GEDCOM.";
+"error.provider.unavailable" = "Файл в настоящее время недоступен у его провайдера. Сделайте его доступным офлайн в приложении провайдера, затем повторите попытку.";
+"error.unsupported_file_type" = "Неподдерживаемый тип файла. Пожалуйста, выберите файл GEDCOM (.ged).";
+"error.load.generic" = "Невозможно загрузить файл GEDCOM.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "Невозможно декодировать файл GEDCOM, используя объявленный набор символов.";
+"individual.name.unnamed" = "Без имени";
+
+/* Event labels */
+"event.birth" = "Рождение";
+"event.death" = "Смерть";
+"event.baptism" = "Крещение";
+"event.christening" = "Наречение";
+"event.adult_christening" = "Крещение (взрослое)";
+"event.residence" = "Проживание";
+"event.occupation" = "Занятие";
+"event.burial" = "Погребение";
+"event.graduation" = "Окончание (университета)";
+"event.education" = "Образование";
+"event.event" = "Событие";
+"event.marriage" = "Брак";
+
+/* Event detail labels */
+"event.detail.cause" = "Причина";
+"event.detail.type" = "Тип";
+"event.detail.agency" = "Агентство";
+"event.detail.religion" = "Религия";

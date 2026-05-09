@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "Iawn";
+"general.done" = "Wedi'i Wneud";
+"general.close" = "Cau";
+
+/* Tab titles */
+"tab.home.title" = "Cartref";
+"tab.index.title" = "Mynegai";
+"tab.family.title" = "Teulu";
+
+/* Alerts */
+"alert.import_failure.title" = "Methu agor ffeil";
+
+/* Home tab */
+"home.header.title" = "Dewis ffeil GEDCOM";
+"home.header.subtitle" = "Dewiswch ffeil GEDCOM leol i bori ei choeden deuluol.";
+"home.action.browse" = "Pori ffeiliau";
+"home.action.load_sample" = "Llwytho data sampl";
+"home.action.settings" = "Gosodiadau";
+
+/* Settings */
+"settings.title" = "Gosodiadau";
+"settings.sections.appearance" = "Ymddangosiad";
+"settings.theme.label" = "Thema";
+"settings.theme.option_accessibility" = "Thema %@";
+
+/* Theme names */
+"theme.earth" = "Daear";
+"theme.silver" = "Arian";
+
+/* Index tab */
+"index.search.placeholder" = "Chwilio yn ôl enw";
+"index.search.clear_accessibility" = "Clirio testun chwilio";
+"index.placeholder.empty_results" = "Ni ddarganfuwyd unrhyw unigolion.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "Dim data GEDCOM wedi'i lwytho. Dewiswch ffeil o Gartref.";
+"placeholder.no_data" = "Dim data GEDCOM ar gael.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "Yn llwytho data GEDCOM…";
+"family.placeholder.select_from_home" = "Dewiswch ffeil GEDCOM o'r tab Cartref i archwilio manylion teuluol.";
+"family.placeholder.no_individuals" = "Dim unigolion ar gael yn y data GEDCOM hwn.";
+"family.placeholder.select_from_index" = "Dewiswch unigolyn o'r mynegai i weld eu cysylltiadau.";
+
+/* Family view copy */
+"family.error.not_found" = "Ni ddarganfuwyd yr unigolyn.";
+"family.accessibility.individual_details" = "Manylion unigolyn";
+"family.section.parents" = "Rhieni";
+"family.section.family" = "Teulu";
+"family.label.father" = "Tad";
+"family.label.mother" = "Mam";
+"family.label.individual" = "Unigolyn";
+"family.label.spouse" = "Priod";
+"family.label.married" = "Priod";
+"family.message.no_parents" = "Dim rhieni wedi'u cofnodi.";
+"family.message.no_children" = "Dim plant wedi'u cofnodi.";
+
+/* Person summaries */
+"person.unknown_name" = "Anhysbys";
+"person.birth_summary" = "Ganed: %@";
+"person.death_summary" = "Bu farw: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "Manylion unigolyn";
+"individual.info.none" = "Dim gwybodaeth ychwanegol ar gael.";
+"individual.notes.additional" = "Nodiadau ychwanegol";
+"individual.notes.title" = "Nodiadau";
+"individual.section.summary" = "Crynodeb";
+"individual.section.timeline" = "Llinell Amser";
+"individual.summary.full_name" = "Enw llawn";
+"individual.summary.given_name" = "Enw bedydd";
+"individual.summary.surname" = "Cyfenw";
+"individual.summary.gender" = "Rhyw";
+"individual.gender.male" = "Gwryw";
+"individual.gender.female" = "Benyw";
+"individual.gender.unknown" = "Anhysbys";
+"individual.detail.date" = "Dyddiad";
+"individual.detail.place" = "Lle";
+"individual.detail.address" = "Cyfeiriad";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "Dim ffeil wedi'i dewis";
+"open.status.sample_loaded" = "Data sampl wedi'i lwytho o'r bwndel";
+"open.status.file_loaded" = "Ffeil wedi'i lwytho o storfa'r ddyfais";
+"open.status.prompt" = "Dewiswch ffeil i ddechrau";
+"open.section.current_selection" = "Dewis presennol";
+"open.section.status" = "Statws";
+"open.section.actions" = "Gweithredoedd";
+"open.action.reload" = "Ail-lwytho'r ffeil gyfredol";
+"open.action.clear" = "Clirio'r dewis";
+
+/* Error copy */
+"error.sample.load_failed" = "Methu llwytho data sampl.";
+"error.sample.missing_file" = "Mae'r ffeil GEDCOM sampl wedi'i bwndelu ar goll.";
+"error.access.unable_to_access_file" = "Methu cyrchu'r ffeil GEDCOM a ddewiswyd yn flaenorol.";
+"error.provider.unavailable" = "Nid yw'r ffeil ar gael ar hyn o bryd gan ei ddarparwr. Gwnewch hi ar gael all-lein yn ap y darparwr, yna ceisiwch eto.";
+"error.unsupported_file_type" = "Math o ffeil nas cefnogir. Dewiswch ffeil GEDCOM (.ged).";
+"error.load.generic" = "Methu llwytho ffeil GEDCOM.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "Methu dadgodio'r ffeil GEDCOM gan ddefnyddio'r set gymeriadau a ddatganwyd.";
+"individual.name.unnamed" = "Heb Enw";
+
+/* Event labels */
+"event.birth" = "Genedigaeth";
+"event.death" = "Marwolaeth";
+"event.baptism" = "Bedydd";
+"event.christening" = "Bedydd (plentyn)";
+"event.adult_christening" = "Bedydd (oedolyn)";
+"event.residence" = "Preswylfa";
+"event.occupation" = "Galwedigaeth";
+"event.burial" = "Claddedigaeth";
+"event.graduation" = "Graddio";
+"event.education" = "Addysg";
+"event.event" = "Digwyddiad";
+"event.marriage" = "Priodas";
+
+/* Event detail labels */
+"event.detail.cause" = "Achos";
+"event.detail.type" = "Math";
+"event.detail.agency" = "Asiantaeth";
+"event.detail.religion" = "Crefydd";

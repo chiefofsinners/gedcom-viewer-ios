@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "ठीक है";
+"general.done" = "हो गया";
+"general.close" = "बंद करें";
+
+/* Tab titles */
+"tab.home.title" = "होम";
+"tab.index.title" = "इंडेक्स";
+"tab.family.title" = "परिवार";
+
+/* Alerts */
+"alert.import_failure.title" = "फ़ाइल खोलने में असमर्थ";
+
+/* Home tab */
+"home.header.title" = "एक GEDCOM फ़ाइल चुनें";
+"home.header.subtitle" = "वंशावली देखने के लिए एक स्थानीय GEDCOM फ़ाइल चुनें।";
+"home.action.browse" = "फ़ाइलें ब्राउज़ करें";
+"home.action.load_sample" = "नमूना डेटा लोड करें";
+"home.action.settings" = "सेटिंग्स";
+
+/* Settings */
+"settings.title" = "सेटिंग्स";
+"settings.sections.appearance" = "दिखावट";
+"settings.theme.label" = "थीम";
+"settings.theme.option_accessibility" = "%@ थीम";
+
+/* Theme names */
+"theme.earth" = "पृथ्वी";
+"theme.silver" = "चाँदी";
+
+/* Index tab */
+"index.search.placeholder" = "नाम से खोजें";
+"index.search.clear_accessibility" = "खोज पाठ साफ़ करें";
+"index.placeholder.empty_results" = "कोई व्यक्ति नहीं मिला।";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "कोई GEDCOM डेटा लोड नहीं हुआ। होम से एक फ़ाइल चुनें।";
+"placeholder.no_data" = "कोई GEDCOM डेटा उपलब्ध नहीं है।";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "GEDCOM डेटा लोड हो रहा है…";
+"family.placeholder.select_from_home" = "परिवार के विवरण देखने के लिए होम टैब से एक GEDCOM फ़ाइल चुनें।";
+"family.placeholder.no_individuals" = "इस GEDCOM डेटा में कोई व्यक्ति उपलब्ध नहीं है।";
+"family.placeholder.select_from_index" = "कृपया उनके कनेक्शन देखने के लिए इंडेक्स से एक व्यक्ति चुनें।";
+
+/* Family view copy */
+"family.error.not_found" = "व्यक्ति नहीं मिला।";
+"family.accessibility.individual_details" = "व्यक्तिगत विवरण";
+"family.section.parents" = "माता-पिता";
+"family.section.family" = "परिवार";
+"family.label.father" = "पिता";
+"family.label.mother" = "माता";
+"family.label.individual" = "व्यक्ति";
+"family.label.spouse" = "पति/पत्नी";
+"family.label.married" = "विवाहित";
+"family.message.no_parents" = "कोई माता-पिता रिकॉर्ड नहीं किए गए।";
+"family.message.no_children" = "कोई बच्चे रिकॉर्ड नहीं किए गए।";
+
+/* Person summaries */
+"person.unknown_name" = "अज्ञात";
+"person.birth_summary" = "जन्म: %@";
+"person.death_summary" = "मृत्यु: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "व्यक्तिगत विवरण";
+"individual.info.none" = "कोई अतिरिक्त जानकारी उपलब्ध नहीं है।";
+"individual.notes.additional" = "अतिरिक्त नोट्स";
+"individual.notes.title" = "नोट्स";
+"individual.section.summary" = "सारांश";
+"individual.section.timeline" = "समयरेखा";
+"individual.summary.full_name" = "पूरा नाम";
+"individual.summary.given_name" = "दिया गया नाम";
+"individual.summary.surname" = "उपनाम";
+"individual.summary.gender" = "लिंग";
+"individual.gender.male" = "पुरुष";
+"individual.gender.female" = "महिला";
+"individual.gender.unknown" = "अज्ञात";
+"individual.detail.date" = "तिथि";
+"individual.detail.place" = "स्थान";
+"individual.detail.address" = "पता";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "कोई फ़ाइल नहीं चुनी गई";
+"open.status.sample_loaded" = "बंडल से नमूना डेटा लोड किया गया";
+"open.status.file_loaded" = "डिवाइस स्टोरेज से फ़ाइल लोड की गई";
+"open.status.prompt" = "शुरू करने के लिए एक फ़ाइल चुनें";
+"open.section.current_selection" = "वर्तमान चयन";
+"open.section.status" = "स्थिति";
+"open.section.actions" = "कार्य";
+"open.action.reload" = "वर्तमान फ़ाइल पुनः लोड करें";
+"open.action.clear" = "चयन साफ़ करें";
+
+/* Error copy */
+"error.sample.load_failed" = "नमूना डेटा लोड करने में असमर्थ।";
+"error.sample.missing_file" = "बंडल की गई GEDCOM नमूना फ़ाइल गायब है।";
+"error.access.unable_to_access_file" = "पहले से चुनी गई GEDCOM फ़ाइल तक पहुँचने में असमर्थ।";
+"error.provider.unavailable" = "फ़ाइल वर्तमान में अपने प्रदाता से उपलब्ध नहीं है। इसे प्रदाता ऐप में ऑफ़लाइन उपलब्ध कराएँ, फिर पुनः प्रयास करें।";
+"error.unsupported_file_type" = "असमर्थित फ़ाइल प्रकार। कृपया एक GEDCOM (.ged) फ़ाइल चुनें।";
+"error.load.generic" = "GEDCOM फ़ाइल लोड करने में असमर्थ।";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "घोषित कैरेक्टर सेट का उपयोग करके GEDCOM फ़ाइल को डिकोड करने में असमर्थ।";
+"individual.name.unnamed" = "अनाम";
+
+/* Event labels */
+"event.birth" = "जन्म";
+"event.death" = "मृत्यु";
+"event.baptism" = "बपतिस्मा";
+"event.christening" = "ईसाई नामकरण संस्कार";
+"event.adult_christening" = "वयस्क बपतिस्मा";
+"event.residence" = "निवास";
+"event.occupation" = "व्यवसाय";
+"event.burial" = "दफ़न";
+"event.graduation" = "स्नातक";
+"event.education" = "शिक्षा";
+"event.event" = "घटना";
+"event.marriage" = "विवाह";
+
+/* Event detail labels */
+"event.detail.cause" = "कारण";
+"event.detail.type" = "प्रकार";
+"event.detail.agency" = "एजेंसी";
+"event.detail.religion" = "धर्म";

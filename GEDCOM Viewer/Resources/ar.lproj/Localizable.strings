@@ -1,0 +1,124 @@
+ /* General actions */
+"general.ok" = "موافق";
+"general.done" = "تم";
+"general.close" = "إغلاق";
+
+/* Tab titles */
+"tab.home.title" = "الرئيسية";
+"tab.index.title" = "الفهرس";
+"tab.family.title" = "العائلة";
+
+/* Alerts */
+"alert.import_failure.title" = "تعذر فتح الملف";
+
+/* Home tab */
+"home.header.title" = "حدد ملف GEDCOM";
+"home.header.subtitle" = "اختر ملف GEDCOM محليًا لتصفح شجرة عائلته.";
+"home.action.browse" = "تصفح الملفات";
+"home.action.load_sample" = "تحميل بيانات العينة";
+"home.action.settings" = "الإعدادات";
+
+/* Settings */
+"settings.title" = "الإعدادات";
+"settings.sections.appearance" = "المظهر";
+"settings.theme.label" = "السمة";
+"settings.theme.option_accessibility" = "سمة %@";
+
+/* Theme names */
+"theme.earth" = "الأرض";
+"theme.silver" = "الفضة";
+
+/* Index tab */
+"index.search.placeholder" = "البحث بالاسم";
+"index.search.clear_accessibility" = "مسح نص البحث";
+"index.placeholder.empty_results" = "لم يتم العثور على أفراد.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "لم يتم تحميل بيانات GEDCOM. اختر ملفًا من الرئيسية.";
+"placeholder.no_data" = "لا توجد بيانات GEDCOM متاحة.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "جارٍ تحميل بيانات GEDCOM…";
+"family.placeholder.select_from_home" = "اختر ملف GEDCOM من علامة التبويب الرئيسية لاستكشاف تفاصيل العائلة.";
+"family.placeholder.no_individuals" = "لا يوجد أفراد متاحون في بيانات GEDCOM هذه.";
+"family.placeholder.select_from_index" = "يرجى تحديد فرد من الفهرس لعرض اتصالاته.";
+
+/* Family view copy */
+"family.error.not_found" = "لم يتم العثور على الفرد.";
+"family.accessibility.individual_details" = "تفاصيل الفرد";
+"family.section.parents" = "الوالدان";
+"family.section.family" = "العائلة";
+"family.label.father" = "الأب";
+"family.label.mother" = "الأم";
+"family.label.individual" = "الفرد";
+"family.label.spouse" = "الزوج/الزوجة";
+"family.label.married" = "متزوج/متزوجة";
+"family.message.no_parents" = "لا يوجد والدان مسجلان.";
+"family.message.no_children" = "لا يوجد أطفال مسجلون.";
+
+/* Person summaries */
+"person.unknown_name" = "غير معروف";
+"person.birth_summary" = "الميلاد: %@";
+"person.death_summary" = "الوفاة: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "تفاصيل الفرد";
+"individual.info.none" = "لا توجد معلومات إضافية متاحة.";
+"individual.notes.additional" = "ملاحظات إضافية";
+"individual.notes.title" = "ملاحظات";
+"individual.section.summary" = "ملخص";
+"individual.section.timeline" = "الجدول الزمني";
+"individual.summary.full_name" = "الاسم الكامل";
+"individual.summary.given_name" = "الاسم الأول";
+"individual.summary.surname" = "اسم العائلة";
+"individual.summary.gender" = "الجنس";
+"individual.gender.male" = "ذكر";
+"individual.gender.female" = "أنثى";
+"individual.gender.unknown" = "غير معروف";
+"individual.detail.date" = "التاريخ";
+"individual.detail.place" = "المكان";
+"individual.detail.address" = "العنوان";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "لم يتم اختيار أي ملف";
+"open.status.sample_loaded" = "تم تحميل بيانات العينة من الحزمة";
+"open.status.file_loaded" = "تم تحميل الملف من تخزين الجهاز";
+"open.status.prompt" = "اختر ملفًا للبدء";
+"open.section.current_selection" = "الاختيار الحالي";
+"open.section.status" = "الحالة";
+"open.section.actions" = "الإجراءات";
+"open.action.reload" = "إعادة تحميل الملف الحالي";
+"open.action.clear" = "مسح الاختيار";
+
+/* Error copy */
+"error.sample.load_failed" = "تعذر تحميل بيانات العينة.";
+"error.sample.missing_file" = "ملف GEDCOM الخاص بالعينة المرفقة مفقود.";
+"error.access.unable_to_access_file" = "تعذر الوصول إلى ملف GEDCOM المحدد مسبقًا.";
+"error.provider.unavailable" = "الملف غير متاح حاليًا من مزوده. اجعله متاحًا دون اتصال في تطبيق المزود، ثم حاول مرة أخرى.";
+"error.unsupported_file_type" = "نوع ملف غير مدعوم. يرجى اختيار ملف GEDCOM (.ged).";
+"error.load.generic" = "تعذر تحميل ملف GEDCOM.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "تعذر فك ترميز ملف GEDCOM باستخدام مجموعة الأحرف المعلنة.";
+"individual.name.unnamed" = "غير مسمى";
+
+/* Event labels */
+"event.birth" = "الميلاد";
+"event.death" = "الوفاة";
+"event.baptism" = "التعميد";
+"event.christening" = "التنصير";
+"event.adult_christening" = "تنصير الكبار";
+"event.residence" = "الإقامة";
+"event.occupation" = "المهنة";
+"event.burial" = "الدفن";
+"event.graduation" = "التخرج";
+"event.education" = "التعليم";
+"event.event" = "حدث";
+"event.marriage" = "الزواج";
+
+/* Event detail labels */
+"event.detail.cause" = "السبب";
+"event.detail.type" = "النوع";
+"event.detail.agency" = "الوكالة";
+"event.detail.religion" = "الديانة";

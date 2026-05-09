@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "OK";
+"general.done" = "Hoàn tất";
+"general.close" = "Đóng";
+
+/* Tab titles */
+"tab.home.title" = "Trang chủ";
+"tab.index.title" = "Mục lục";
+"tab.family.title" = "Gia đình";
+
+/* Alerts */
+"alert.import_failure.title" = "Không thể mở tệp";
+
+/* Home tab */
+"home.header.title" = "Chọn một tệp GEDCOM";
+"home.header.subtitle" = "Chọn một tệp GEDCOM cục bộ để duyệt cây gia đình của nó.";
+"home.action.browse" = "Duyệt tệp";
+"home.action.load_sample" = "Tải dữ liệu mẫu";
+"home.action.settings" = "Cài đặt";
+
+/* Settings */
+"settings.title" = "Cài đặt";
+"settings.sections.appearance" = "Giao diện";
+"settings.theme.label" = "Chủ đề";
+"settings.theme.option_accessibility" = "Chủ đề %@";
+
+/* Theme names */
+"theme.earth" = "Trái đất";
+"theme.silver" = "Bạc";
+
+/* Index tab */
+"index.search.placeholder" = "Tìm kiếm theo tên";
+"index.search.clear_accessibility" = "Xóa văn bản tìm kiếm";
+"index.placeholder.empty_results" = "Không tìm thấy cá nhân nào.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "Chưa tải dữ liệu GEDCOM. Chọn một tệp từ Trang chủ.";
+"placeholder.no_data" = "Không có dữ liệu GEDCOM nào có sẵn.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "Đang tải dữ liệu GEDCOM…";
+"family.placeholder.select_from_home" = "Chọn một tệp GEDCOM từ tab Trang chủ để khám phá chi tiết gia đình.";
+"family.placeholder.no_individuals" = "Không có cá nhân nào có sẵn trong dữ liệu GEDCOM này.";
+"family.placeholder.select_from_index" = "Vui lòng chọn một cá nhân từ mục lục để xem các kết nối của họ.";
+
+/* Family view copy */
+"family.error.not_found" = "Không tìm thấy cá nhân.";
+"family.accessibility.individual_details" = "Chi tiết cá nhân";
+"family.section.parents" = "Cha mẹ";
+"family.section.family" = "Gia đình";
+"family.label.father" = "Cha";
+"family.label.mother" = "Mẹ";
+"family.label.individual" = "Cá nhân";
+"family.label.spouse" = "Vợ/Chồng";
+"family.label.married" = "Đã kết hôn";
+"family.message.no_parents" = "Không có cha mẹ nào được ghi lại.";
+"family.message.no_children" = "Không có con nào được ghi lại.";
+
+/* Person summaries */
+"person.unknown_name" = "Không rõ";
+"person.birth_summary" = "Sinh: %@";
+"person.death_summary" = "Mất: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "Chi tiết cá nhân";
+"individual.info.none" = "Không có thông tin bổ sung nào có sẵn.";
+"individual.notes.additional" = "Ghi chú bổ sung";
+"individual.notes.title" = "Ghi chú";
+"individual.section.summary" = "Tóm tắt";
+"individual.section.timeline" = "Dòng thời gian";
+"individual.summary.full_name" = "Họ tên đầy đủ";
+"individual.summary.given_name" = "Tên đệm";
+"individual.summary.surname" = "Họ";
+"individual.summary.gender" = "Giới tính";
+"individual.gender.male" = "Nam";
+"individual.gender.female" = "Nữ";
+"individual.gender.unknown" = "Không rõ";
+"individual.detail.date" = "Ngày";
+"individual.detail.place" = "Địa điểm";
+"individual.detail.address" = "Địa chỉ";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "Chưa chọn tệp nào";
+"open.status.sample_loaded" = "Đã tải dữ liệu mẫu từ gói";
+"open.status.file_loaded" = "Đã tải tệp từ bộ nhớ thiết bị";
+"open.status.prompt" = "Chọn một tệp để bắt đầu";
+"open.section.current_selection" = "Lựa chọn hiện tại";
+"open.section.status" = "Trạng thái";
+"open.section.actions" = "Hành động";
+"open.action.reload" = "Tải lại tệp hiện tại";
+"open.action.clear" = "Xóa lựa chọn";
+
+/* Error copy */
+"error.sample.load_failed" = "Không thể tải dữ liệu mẫu.";
+"error.sample.missing_file" = "Tệp GEDCOM mẫu đi kèm bị thiếu.";
+"error.access.unable_to_access_file" = "Không thể truy cập tệp GEDCOM đã chọn trước đó.";
+"error.provider.unavailable" = "Tệp hiện không có sẵn từ nhà cung cấp của nó. Vui lòng đặt nó ở chế độ ngoại tuyến trong ứng dụng nhà cung cấp, sau đó thử lại.";
+"error.unsupported_file_type" = "Loại tệp không được hỗ trợ. Vui lòng chọn tệp GEDCOM (.ged).";
+"error.load.generic" = "Không thể tải tệp GEDCOM.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "Không thể giải mã tệp GEDCOM bằng cách sử dụng bộ ký tự đã khai báo.";
+"individual.name.unnamed" = "Chưa đặt tên";
+
+/* Event labels */
+"event.birth" = "Sinh";
+"event.death" = "Mất";
+"event.baptism" = "Báp-têm";
+"event.christening" = "Lễ rửa tội";
+"event.adult_christening" = "Lễ rửa tội người lớn";
+"event.residence" = "Nơi cư trú";
+"event.occupation" = "Nghề nghiệp";
+"event.burial" = "Chôn cất";
+"event.graduation" = "Tốt nghiệp";
+"event.education" = "Giáo dục";
+"event.event" = "Sự kiện";
+"event.marriage" = "Kết hôn";
+
+/* Event detail labels */
+"event.detail.cause" = "Nguyên nhân";
+"event.detail.type" = "Loại";
+"event.detail.agency" = "Cơ quan";
+"event.detail.religion" = "Tôn giáo";

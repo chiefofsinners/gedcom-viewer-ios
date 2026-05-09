@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "OK";
+"general.done" = "Fertig";
+"general.close" = "Schließen";
+
+/* Tab titles */
+"tab.home.title" = "Startseite";
+"tab.index.title" = "Index";
+"tab.family.title" = "Familie";
+
+/* Alerts */
+"alert.import_failure.title" = "Datei kann nicht geöffnet werden";
+
+/* Home tab */
+"home.header.title" = "GEDCOM-Datei auswählen";
+"home.header.subtitle" = "Wählen Sie eine lokale GEDCOM-Datei, um den Stammbaum zu durchsuchen.";
+"home.action.browse" = "Dateien durchsuchen";
+"home.action.load_sample" = "Beispieldaten laden";
+"home.action.settings" = "Einstellungen";
+
+/* Settings */
+"settings.title" = "Einstellungen";
+"settings.sections.appearance" = "Erscheinungsbild";
+"settings.theme.label" = "Thema";
+"settings.theme.option_accessibility" = "%@ Thema";
+
+/* Theme names */
+"theme.earth" = "Erde";
+"theme.silver" = "Silber";
+
+/* Index tab */
+"index.search.placeholder" = "Nach Namen suchen";
+"index.search.clear_accessibility" = "Suchtext löschen";
+"index.placeholder.empty_results" = "Keine Personen gefunden.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "Keine GEDCOM-Daten geladen. Wählen Sie eine Datei von der Startseite.";
+"placeholder.no_data" = "Keine GEDCOM-Daten verfügbar.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "GEDCOM-Daten werden geladen…";
+"family.placeholder.select_from_home" = "Wählen Sie eine GEDCOM-Datei auf der Startseite, um Familiendetails zu erkunden.";
+"family.placeholder.no_individuals" = "Keine Personen in diesen GEDCOM-Daten verfügbar.";
+"family.placeholder.select_from_index" = "Bitte wählen Sie eine Person aus dem Index, um ihre Verbindungen anzuzeigen.";
+
+/* Family view copy */
+"family.error.not_found" = "Person nicht gefunden.";
+"family.accessibility.individual_details" = "Details zur Person";
+"family.section.parents" = "Eltern";
+"family.section.family" = "Familie";
+"family.label.father" = "Vater";
+"family.label.mother" = "Mutter";
+"family.label.individual" = "Person";
+"family.label.spouse" = "Ehepartner(in)";
+"family.label.married" = "Verheiratet";
+"family.message.no_parents" = "Keine Eltern erfasst.";
+"family.message.no_children" = "Keine Kinder erfasst.";
+
+/* Person summaries */
+"person.unknown_name" = "Unbekannt";
+"person.birth_summary" = "Geboren: %@";
+"person.death_summary" = "Gestorben: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "Details zur Person";
+"individual.info.none" = "Keine zusätzlichen Informationen verfügbar.";
+"individual.notes.additional" = "Zusätzliche Notizen";
+"individual.notes.title" = "Notizen";
+"individual.section.summary" = "Zusammenfassung";
+"individual.section.timeline" = "Zeitleiste";
+"individual.summary.full_name" = "Vollständiger Name";
+"individual.summary.given_name" = "Vorname";
+"individual.summary.surname" = "Nachname";
+"individual.summary.gender" = "Geschlecht";
+"individual.gender.male" = "Männlich";
+"individual.gender.female" = "Weiblich";
+"individual.gender.unknown" = "Unbekannt";
+"individual.detail.date" = "Datum";
+"individual.detail.place" = "Ort";
+"individual.detail.address" = "Adresse";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "Keine Datei ausgewählt";
+"open.status.sample_loaded" = "Beispieldaten aus dem Bundle geladen";
+"open.status.file_loaded" = "Datei vom Gerätespeicher geladen";
+"open.status.prompt" = "Wählen Sie eine Datei, um zu beginnen";
+"open.section.current_selection" = "Aktuelle Auswahl";
+"open.section.status" = "Status";
+"open.section.actions" = "Aktionen";
+"open.action.reload" = "Aktuelle Datei neu laden";
+"open.action.clear" = "Auswahl löschen";
+
+/* Error copy */
+"error.sample.load_failed" = "Beispieldaten konnten nicht geladen werden.";
+"error.sample.missing_file" = "Die gebündelte GEDCOM-Beispieldatei fehlt.";
+"error.access.unable_to_access_file" = "Auf die zuvor ausgewählte GEDCOM-Datei kann nicht zugegriffen werden.";
+"error.provider.unavailable" = "Die Datei ist derzeit bei ihrem Anbieter nicht verfügbar. Machen Sie sie in der Anbieter-App offline verfügbar und versuchen Sie es dann erneut.";
+"error.unsupported_file_type" = "Nicht unterstützter Dateityp. Bitte wählen Sie eine GEDCOM-Datei (.ged).";
+"error.load.generic" = "GEDCOM-Datei konnte nicht geladen werden.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "Die GEDCOM-Datei kann mit dem angegebenen Zeichensatz nicht decodiert werden.";
+"individual.name.unnamed" = "Unbenannt";
+
+/* Event labels */
+"event.birth" = "Geburt";
+"event.death" = "Tod";
+"event.baptism" = "Taufe";
+"event.christening" = "Taufe (Kind)";
+"event.adult_christening" = "Taufe (Erwachsener)";
+"event.residence" = "Wohnsitz";
+"event.occupation" = "Beruf";
+"event.burial" = "Beerdigung";
+"event.graduation" = "Abschluss";
+"event.education" = "Bildung";
+"event.event" = "Ereignis";
+"event.marriage" = "Heirat";
+
+/* Event detail labels */
+"event.detail.cause" = "Ursache";
+"event.detail.type" = "Typ";
+"event.detail.agency" = "Agentur";
+"event.detail.religion" = "Religion";

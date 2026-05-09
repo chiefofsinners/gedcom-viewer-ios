@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "确定";
+"general.done" = "完成";
+"general.close" = "关闭";
+
+/* Tab titles */
+"tab.home.title" = "主页";
+"tab.index.title" = "索引";
+"tab.family.title" = "家庭";
+
+/* Alerts */
+"alert.import_failure.title" = "无法打开文件";
+
+/* Home tab */
+"home.header.title" = "选择一个GEDCOM文件";
+"home.header.subtitle" = "选择一个本地GEDCOM文件来浏览其家谱。";
+"home.action.browse" = "浏览文件";
+"home.action.load_sample" = "加载示例数据";
+"home.action.settings" = "设置";
+
+/* Settings */
+"settings.title" = "设置";
+"settings.sections.appearance" = "外观";
+"settings.theme.label" = "主题";
+"settings.theme.option_accessibility" = "%@ 主题";
+
+/* Theme names */
+"theme.earth" = "大地";
+"theme.silver" = "银色";
+
+/* Index tab */
+"index.search.placeholder" = "按名称搜索";
+"index.search.clear_accessibility" = "清除搜索文本";
+"index.placeholder.empty_results" = "未找到任何个人。";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "未加载GEDCOM数据。请从主页选择一个文件。";
+"placeholder.no_data" = "没有可用的GEDCOM数据。";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "正在加载GEDCOM数据…";
+"family.placeholder.select_from_home" = "请从“主页”标签选择一个GEDCOM文件以查看家庭详细信息。";
+"family.placeholder.no_individuals" = "此GEDCOM数据中没有可用的个人。";
+"family.placeholder.select_from_index" = "请从索引中选择一个个人以查看其关系。";
+
+/* Family view copy */
+"family.error.not_found" = "未找到个人。";
+"family.accessibility.individual_details" = "个人详细信息";
+"family.section.parents" = "父母";
+"family.section.family" = "家庭";
+"family.label.father" = "父亲";
+"family.label.mother" = "母亲";
+"family.label.individual" = "个人";
+"family.label.spouse" = "配偶";
+"family.label.married" = "已婚";
+"family.message.no_parents" = "没有记录父母。";
+"family.message.no_children" = "没有记录子女。";
+
+/* Person summaries */
+"person.unknown_name" = "未知";
+"person.birth_summary" = "出生: %@";
+"person.death_summary" = "死亡: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "个人详细信息";
+"individual.info.none" = "没有可用的附加信息。";
+"individual.notes.additional" = "附加笔记";
+"individual.notes.title" = "笔记";
+"individual.section.summary" = "摘要";
+"individual.section.timeline" = "时间线";
+"individual.summary.full_name" = "全名";
+"individual.summary.given_name" = "名字";
+"individual.summary.surname" = "姓氏";
+"individual.summary.gender" = "性别";
+"individual.gender.male" = "男性";
+"individual.gender.female" = "女性";
+"individual.gender.unknown" = "未知";
+"individual.detail.date" = "日期";
+"individual.detail.place" = "地点";
+"individual.detail.address" = "地址";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "未选择文件";
+"open.status.sample_loaded" = "已从捆绑包加载示例数据";
+"open.status.file_loaded" = "已从设备存储加载文件";
+"open.status.prompt" = "选择一个文件开始";
+"open.section.current_selection" = "当前选择";
+"open.section.status" = "状态";
+"open.section.actions" = "操作";
+"open.action.reload" = "重新加载当前文件";
+"open.action.clear" = "清除选择";
+
+/* Error copy */
+"error.sample.load_failed" = "无法加载示例数据。";
+"error.sample.missing_file" = "捆绑的GEDCOM示例文件缺失。";
+"error.access.unable_to_access_file" = "无法访问先前选择的GEDCOM文件。";
+"error.provider.unavailable" = "该文件目前无法从其提供商处获取。请在提供商应用中将其设为离线可用，然后重试。";
+"error.unsupported_file_type" = "不支持的文件类型。请选择一个GEDCOM (.ged) 文件。";
+"error.load.generic" = "无法加载GEDCOM文件。";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "无法使用声明的字符集解码GEDCOM文件。";
+"individual.name.unnamed" = "未命名";
+
+/* Event labels */
+"event.birth" = "出生";
+"event.death" = "死亡";
+"event.baptism" = "洗礼";
+"event.christening" = "基督洗礼";
+"event.adult_christening" = "成人洗礼";
+"event.residence" = "居住";
+"event.occupation" = "职业";
+"event.burial" = "埋葬";
+"event.graduation" = "毕业";
+"event.education" = "教育";
+"event.event" = "事件";
+"event.marriage" = "婚姻";
+
+/* Event detail labels */
+"event.detail.cause" = "原因";
+"event.detail.type" = "类型";
+"event.detail.agency" = "机构";
+"event.detail.religion" = "宗教";

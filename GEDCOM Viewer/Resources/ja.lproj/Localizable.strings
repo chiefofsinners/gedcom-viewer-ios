@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "OK";
+"general.done" = "完了";
+"general.close" = "閉じる";
+
+/* Tab titles */
+"tab.home.title" = "ホーム";
+"tab.index.title" = "索引";
+"tab.family.title" = "家族";
+
+/* Alerts */
+"alert.import_failure.title" = "ファイルを開けません";
+
+/* Home tab */
+"home.header.title" = "GEDCOMファイルを選択";
+"home.header.subtitle" = "ローカルのGEDCOMファイルを選択して、その家系図を閲覧します。";
+"home.action.browse" = "ファイルを閲覧";
+"home.action.load_sample" = "サンプルデータを読み込む";
+"home.action.settings" = "設定";
+
+/* Settings */
+"settings.title" = "設定";
+"settings.sections.appearance" = "外観";
+"settings.theme.label" = "テーマ";
+"settings.theme.option_accessibility" = "%@ テーマ";
+
+/* Theme names */
+"theme.earth" = "大地";
+"theme.silver" = "銀";
+
+/* Index tab */
+"index.search.placeholder" = "名前で検索";
+"index.search.clear_accessibility" = "検索テキストをクリア";
+"index.placeholder.empty_results" = "個人が見つかりませんでした。";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "GEDCOMデータが読み込まれていません。ホームからファイルを選択してください。";
+"placeholder.no_data" = "利用可能なGEDCOMデータがありません。";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "GEDCOMデータを読み込み中…";
+"family.placeholder.select_from_home" = "ホームタブからGEDCOMファイルを選択して、家族の詳細を調べます。";
+"family.placeholder.no_individuals" = "このGEDCOMデータには個人がいません。";
+"family.placeholder.select_from_index" = "接続を表示するには、索引から個人を選択してください。";
+
+/* Family view copy */
+"family.error.not_found" = "個人が見つかりません。";
+"family.accessibility.individual_details" = "個人の詳細";
+"family.section.parents" = "両親";
+"family.section.family" = "家族";
+"family.label.father" = "父";
+"family.label.mother" = "母";
+"family.label.individual" = "個人";
+"family.label.spouse" = "配偶者";
+"family.label.married" = "既婚";
+"family.message.no_parents" = "両親の記録がありません。";
+"family.message.no_children" = "子供の記録がありません。";
+
+/* Person summaries */
+"person.unknown_name" = "不明";
+"person.birth_summary" = "出生: %@";
+"person.death_summary" = "死亡: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "個人の詳細";
+"individual.info.none" = "追加情報はありません。";
+"individual.notes.additional" = "追加のメモ";
+"individual.notes.title" = "メモ";
+"individual.section.summary" = "概要";
+"individual.section.timeline" = "タイムライン";
+"individual.summary.full_name" = "氏名";
+"individual.summary.given_name" = "名";
+"individual.summary.surname" = "姓";
+"individual.summary.gender" = "性別";
+"individual.gender.male" = "男性";
+"individual.gender.female" = "女性";
+"individual.gender.unknown" = "不明";
+"individual.detail.date" = "日付";
+"individual.detail.place" = "場所";
+"individual.detail.address" = "住所";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "ファイルが選択されていません";
+"open.status.sample_loaded" = "バンドルからサンプルデータが読み込まれました";
+"open.status.file_loaded" = "デバイスのストレージからファイルが読み込まれました";
+"open.status.prompt" = "開始するファイルを選択してください";
+"open.section.current_selection" = "現在の選択";
+"open.section.status" = "ステータス";
+"open.section.actions" = "アクション";
+"open.action.reload" = "現在のファイルを再読み込み";
+"open.action.clear" = "選択をクリア";
+
+/* Error copy */
+"error.sample.load_failed" = "サンプルデータを読み込めません。";
+"error.sample.missing_file" = "バンドルされたGEDCOMサンプルファイルがありません。";
+"error.access.unable_to_access_file" = "以前選択したGEDCOMファイルにアクセスできません。";
+"error.provider.unavailable" = "ファイルは現在、提供元から利用できません。提供元アプリでオフラインで利用できるようにしてから、再試行してください。";
+"error.unsupported_file_type" = "サポートされていないファイルタイプです。GEDCOM (.ged) ファイルを選択してください。";
+"error.load.generic" = "GEDCOMファイルを読み込めません。";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "宣言された文字セットを使用してGEDCOMファイルをデコードできません。";
+"individual.name.unnamed" = "無名";
+
+/* Event labels */
+"event.birth" = "誕生";
+"event.death" = "死亡";
+"event.baptism" = "洗礼";
+"event.christening" = "命名式";
+"event.adult_christening" = "成人洗礼";
+"event.residence" = "居住";
+"event.occupation" = "職業";
+"event.burial" = "埋葬";
+"event.graduation" = "卒業";
+"event.education" = "教育";
+"event.event" = "イベント";
+"event.marriage" = "結婚";
+
+/* Event detail labels */
+"event.detail.cause" = "原因";
+"event.detail.type" = "タイプ";
+"event.detail.agency" = "機関";
+"event.detail.religion" = "宗教";

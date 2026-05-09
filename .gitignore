@@ -1,0 +1,40 @@
+# Swift / Xcode
+.DS_Store
+DerivedData/
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+
+# Build products
+build/
+Build/
+
+# Swift Package Manager
+.build/
+Packages/
+Package.resolved
+
+# Cocoapods / Carthage (if added later)
+Pods/
+Carthage/
+Rome/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+fastlane/metadata/
+fastlane/tmp/
+fastlane/Appfile
+fastlane/Deliverfile
+fastlane/Fastfile
+fastlane/Snapfile
+
+# Misc tooling
+.swiftpm/
+.idea/
+.vscode/
+*.swp
+*.log
+tmp/

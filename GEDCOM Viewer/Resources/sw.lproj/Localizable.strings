@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "SAWA";
+"general.done" = "Imekamilika";
+"general.close" = "Funga";
+
+/* Tab titles */
+"tab.home.title" = "Nyumbani";
+"tab.index.title" = "Faharasa";
+"tab.family.title" = "Familia";
+
+/* Alerts */
+"alert.import_failure.title" = "Haiwezi kufungua faili";
+
+/* Home tab */
+"home.header.title" = "Chagua faili ya GEDCOM";
+"home.header.subtitle" = "Chagua faili ya GEDCOM ya ndani ili kuvinjari mti wake wa familia.";
+"home.action.browse" = "Vinjari faili";
+"home.action.load_sample" = "Pakia data ya sampuli";
+"home.action.settings" = "Mipangilio";
+
+/* Settings */
+"settings.title" = "Mipangilio";
+"settings.sections.appearance" = "Mwonekano";
+"settings.theme.label" = "Mandhari";
+"settings.theme.option_accessibility" = "Mandhari %@";
+
+/* Theme names */
+"theme.earth" = "Dunia";
+"theme.silver" = "Fedha";
+
+/* Index tab */
+"index.search.placeholder" = "Tafuta kwa jina";
+"index.search.clear_accessibility" = "Futa maandishi ya utafutaji";
+"index.placeholder.empty_results" = "Hakuna watu waliopatikana.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "Hakuna data ya GEDCOM iliyopakia. Chagua faili kutoka Nyumbani.";
+"placeholder.no_data" = "Hakuna data ya GEDCOM inayopatikana.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "Inapakia data ya GEDCOM…";
+"family.placeholder.select_from_home" = "Chagua faili ya GEDCOM kutoka kichupo cha Nyumbani ili kuchunguza maelezo ya familia.";
+"family.placeholder.no_individuals" = "Hakuna watu wanaopatikana katika data hii ya GEDCOM.";
+"family.placeholder.select_from_index" = "Tafadhali chagua mtu kutoka faharasa ili kuona miunganisho yao.";
+
+/* Family view copy */
+"family.error.not_found" = "Mtu hajapatikana.";
+"family.accessibility.individual_details" = "Maelezo ya mtu binafsi";
+"family.section.parents" = "Wazazi";
+"family.section.family" = "Familia";
+"family.label.father" = "Baba";
+"family.label.mother" = "Mama";
+"family.label.individual" = "Mtu";
+"family.label.spouse" = "Mwenzi";
+"family.label.married" = "Ameoa/Ameolewa";
+"family.message.no_parents" = "Hakuna wazazi walioandikwa.";
+"family.message.no_children" = "Hakuna watoto walioandikwa.";
+
+/* Person summaries */
+"person.unknown_name" = "Haijulikani";
+"person.birth_summary" = "Kuzaliwa: %@";
+"person.death_summary" = "Kifo: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "Maelezo ya mtu binafsi";
+"individual.info.none" = "Hakuna maelezo ya ziada yanayopatikana.";
+"individual.notes.additional" = "Vidokezo vya ziada";
+"individual.notes.title" = "Vidokezo";
+"individual.section.summary" = "Muhtasari";
+"individual.section.timeline" = "Mstari wa Muda";
+"individual.summary.full_name" = "Jina kamili";
+"individual.summary.given_name" = "Jina la kwanza";
+"individual.summary.surname" = "Jina la ukoo";
+"individual.summary.gender" = "Jinsia";
+"individual.gender.male" = "Mwanaume";
+"individual.gender.female" = "Mwanamke";
+"individual.gender.unknown" = "Haijulikani";
+"individual.detail.date" = "Tarehe";
+"individual.detail.place" = "Mahali";
+"individual.detail.address" = "Anwani";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "Hakuna faili iliyochaguliwa";
+"open.status.sample_loaded" = "Data ya sampuli imepakiwa kutoka kwenye kifurushi";
+"open.status.file_loaded" = "Faili imepakiwa kutoka kwenye hifadhi ya kifaa";
+"open.status.prompt" = "Chagua faili ili kuanza";
+"open.section.current_selection" = "Uchaguzi wa sasa";
+"open.section.status" = "Hali";
+"open.section.actions" = "Vitendo";
+"open.action.reload" = "Pakia tena faili ya sasa";
+"open.action.clear" = "Futa uteuzi";
+
+/* Error copy */
+"error.sample.load_failed" = "Haiwezi kupakia data ya sampuli.";
+"error.sample.missing_file" = "Faili ya sampuli ya GEDCOM iliyounganishwa haipo.";
+"error.access.unable_to_access_file" = "Haiwezi kufikia faili ya GEDCOM iliyochaguliwa hapo awali.";
+"error.provider.unavailable" = "Faili kwa sasa haipatikani kutoka kwa mtoa huduma wake. Ifanye ipatikane nje ya mtandao katika programu ya mtoa huduma, kisha ujaribu tena.";
+"error.unsupported_file_type" = "Aina ya faili isiyoungwa mkono. Tafadhali chagua faili ya GEDCOM (.ged).";
+"error.load.generic" = "Haiwezi kupakia faili ya GEDCOM.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "Haiwezi kusimbua faili ya GEDCOM kwa kutumia seti ya herufi iliyotangazwa.";
+"individual.name.unnamed" = "Haina Jina";
+
+/* Event labels */
+"event.birth" = "Kuzaliwa";
+"event.death" = "Kifo";
+"event.baptism" = "Ubatizo";
+"event.christening" = "Kubatiza Mtoto";
+"event.adult_christening" = "Ubatizo wa Watu Wazima";
+"event.residence" = "Makazi";
+"event.occupation" = "Kazi";
+"event.burial" = "Mazishi";
+"event.graduation" = "Kuhitimu";
+"event.education" = "Elimu";
+"event.event" = "Tukio";
+"event.marriage" = "Ndoa";
+
+/* Event detail labels */
+"event.detail.cause" = "Sababu";
+"event.detail.type" = "Aina";
+"event.detail.agency" = "Wakala";
+"event.detail.religion" = "Dini";

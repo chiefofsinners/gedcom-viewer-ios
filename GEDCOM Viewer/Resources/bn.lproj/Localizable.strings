@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "ঠিক আছে";
+"general.done" = "সম্পন্ন";
+"general.close" = "বন্ধ করুন";
+
+/* Tab titles */
+"tab.home.title" = "হোম";
+"tab.index.title" = "সূচি";
+"tab.family.title" = "পরিবার";
+
+/* Alerts */
+"alert.import_failure.title" = "ফাইল খুলতে অক্ষম";
+
+/* Home tab */
+"home.header.title" = "একটি GEDCOM ফাইল নির্বাচন করুন";
+"home.header.subtitle" = "এর পারিবারিক গাছ ব্রাউজ করতে একটি স্থানীয় GEDCOM ফাইল বেছে নিন।";
+"home.action.browse" = "ফাইল ব্রাউজ করুন";
+"home.action.load_sample" = "নমুনা ডেটা লোড করুন";
+"home.action.settings" = "সেটিংস";
+
+/* Settings */
+"settings.title" = "সেটিংস";
+"settings.sections.appearance" = "উপস্থিতি";
+"settings.theme.label" = "থিম";
+"settings.theme.option_accessibility" = "%@ থিম";
+
+/* Theme names */
+"theme.earth" = "পৃথিবী";
+"theme.silver" = "রৌপ্য";
+
+/* Index tab */
+"index.search.placeholder" = "নাম দিয়ে অনুসন্ধান করুন";
+"index.search.clear_accessibility" = "অনুসন্ধান টেক্সট সাফ করুন";
+"index.placeholder.empty_results" = "কোনো ব্যক্তি খুঁজে পাওয়া যায়নি।";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "কোনো GEDCOM ডেটা লোড হয়নি। হোম থেকে একটি ফাইল বেছে নিন।";
+"placeholder.no_data" = "কোনো GEDCOM ডেটা উপলব্ধ নেই।";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "GEDCOM ডেটা লোড হচ্ছে…";
+"family.placeholder.select_from_home" = "পরিবারের বিবরণ জানতে হোম ট্যাব থেকে একটি GEDCOM ফাইল বেছে নিন।";
+"family.placeholder.no_individuals" = "এই GEDCOM ডেটাতে কোনো ব্যক্তি উপলব্ধ নেই।";
+"family.placeholder.select_from_index" = "তাদের সংযোগ দেখতে সূচি থেকে একজন ব্যক্তি নির্বাচন করুন।";
+
+/* Family view copy */
+"family.error.not_found" = "ব্যক্তি খুঁজে পাওয়া যায়নি।";
+"family.accessibility.individual_details" = "ব্যক্তির বিবরণ";
+"family.section.parents" = "পিতামাতা";
+"family.section.family" = "পরিবার";
+"family.label.father" = "পিতা";
+"family.label.mother" = "মাতা";
+"family.label.individual" = "ব্যক্তি";
+"family.label.spouse" = "স্বামী/স্ত্রী";
+"family.label.married" = "বিবাহিত";
+"family.message.no_parents" = "কোনো পিতামাতা রেকর্ড করা হয়নি।";
+"family.message.no_children" = "কোনো শিশু রেকর্ড করা হয়নি।";
+
+/* Person summaries */
+"person.unknown_name" = "অজানা";
+"person.birth_summary" = "জন্ম: %@";
+"person.death_summary" = "মৃত্যু: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "ব্যক্তির বিবরণ";
+"individual.info.none" = "কোনো অতিরিক্ত তথ্য উপলব্ধ নেই।";
+"individual.notes.additional" = "অতিরিক্ত নোট";
+"individual.notes.title" = "নোট";
+"individual.section.summary" = "সারাংশ";
+"individual.section.timeline" = "সময়রেখা";
+"individual.summary.full_name" = "পুরো নাম";
+"individual.summary.given_name" = "প্রদত্ত নাম";
+"individual.summary.surname" = "উপাধি";
+"individual.summary.gender" = "লিঙ্গ";
+"individual.gender.male" = "পুরুষ";
+"individual.gender.female" = "মহিলা";
+"individual.gender.unknown" = "অজানা";
+"individual.detail.date" = "তারিখ";
+"individual.detail.place" = "স্থান";
+"individual.detail.address" = "ঠিকানা";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "কোনো ফাইল নির্বাচিত হয়নি";
+"open.status.sample_loaded" = "বান্ডিল থেকে নমুনা ডেটা লোড হয়েছে";
+"open.status.file_loaded" = "ডিভাইস স্টোরেজ থেকে ফাইল লোড হয়েছে";
+"open.status.prompt" = "শুরু করতে একটি ফাইল নির্বাচন করুন";
+"open.section.current_selection" = "বর্তমান নির্বাচন";
+"open.section.status" = "স্থিতি";
+"open.section.actions" = "কর্ম";
+"open.action.reload" = "বর্তমান ফাইল পুনরায় লোড করুন";
+"open.action.clear" = "নির্বাচন সাফ করুন";
+
+/* Error copy */
+"error.sample.load_failed" = "নমুনা ডেটা লোড করতে অক্ষম।";
+"error.sample.missing_file" = "বান্ডিল করা GEDCOM নমুনা ফাইলটি অনুপস্থিত।";
+"error.access.unable_to_access_file" = "আগে নির্বাচিত GEDCOM ফাইলে অ্যাক্সেস করতে অক্ষম।";
+"error.provider.unavailable" = "ফাইলটি বর্তমানে এর প্রোভাইডারের থেকে উপলব্ধ নেই। প্রোভাইডার অ্যাপে এটিকে অফলাইনে উপলব্ধ করুন, তারপর আবার চেষ্টা করুন।";
+"error.unsupported_file_type" = "অসমর্থিত ফাইল প্রকার। দয়া করে একটি GEDCOM (.ged) ফাইল বেছে নিন।";
+"error.load.generic" = "GEDCOM ফাইল লোড করতে অক্ষম।";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "ঘোষিত ক্যারেক্টার সেট ব্যবহার করে GEDCOM ফাইল ডিকোড করতে অক্ষম।";
+"individual.name.unnamed" = "নামহীন";
+
+/* Event labels */
+"event.birth" = "জন্ম";
+"event.death" = "মৃত্যু";
+"event.baptism" = "বাপ্টিজম";
+"event.christening" = "খ্রিস্টেনিং";
+"event.adult_christening" = "প্রাপ্তবয়স্কদের খ্রিস্টেনিং";
+"event.residence" = "বাসস্থান";
+"event.occupation" = "পেশা";
+"event.burial" = "সমাধি";
+"event.graduation" = "স্নাতক";
+"event.education" = "শিক্ষা";
+"event.event" = "ঘটনা";
+"event.marriage" = "বিবাহ";
+
+/* Event detail labels */
+"event.detail.cause" = "কারণ";
+"event.detail.type" = "প্রকার";
+"event.detail.agency" = "এজেন্সি";
+"event.detail.religion" = "ধর্ম";

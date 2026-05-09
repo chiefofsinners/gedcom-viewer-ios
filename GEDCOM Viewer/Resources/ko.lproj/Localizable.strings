@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "확인";
+"general.done" = "완료";
+"general.close" = "닫기";
+
+/* Tab titles */
+"tab.home.title" = "홈";
+"tab.index.title" = "색인";
+"tab.family.title" = "가족";
+
+/* Alerts */
+"alert.import_failure.title" = "파일을 열 수 없음";
+
+/* Home tab */
+"home.header.title" = "GEDCOM 파일 선택";
+"home.header.subtitle" = "로컬 GEDCOM 파일을 선택하여 가계도를 탐색합니다.";
+"home.action.browse" = "파일 찾아보기";
+"home.action.load_sample" = "샘플 데이터 로드";
+"home.action.settings" = "설정";
+
+/* Settings */
+"settings.title" = "설정";
+"settings.sections.appearance" = "모양";
+"settings.theme.label" = "테마";
+"settings.theme.option_accessibility" = "%@ 테마";
+
+/* Theme names */
+"theme.earth" = "지구";
+"theme.silver" = "은";
+
+/* Index tab */
+"index.search.placeholder" = "이름으로 검색";
+"index.search.clear_accessibility" = "검색 텍스트 지우기";
+"index.placeholder.empty_results" = "개인이 발견되지 않았습니다.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "GEDCOM 데이터가 로드되지 않았습니다. 홈에서 파일을 선택하세요.";
+"placeholder.no_data" = "사용 가능한 GEDCOM 데이터가 없습니다.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "GEDCOM 데이터 로드 중…";
+"family.placeholder.select_from_home" = "가족 세부 정보를 탐색하려면 홈 탭에서 GEDCOM 파일을 선택하세요.";
+"family.placeholder.no_individuals" = "이 GEDCOM 데이터에는 사용 가능한 개인이 없습니다.";
+"family.placeholder.select_from_index" = "연결을 보려면 색인에서 개인을 선택하세요.";
+
+/* Family view copy */
+"family.error.not_found" = "개인을 찾을 수 없습니다.";
+"family.accessibility.individual_details" = "개인 세부 정보";
+"family.section.parents" = "부모";
+"family.section.family" = "가족";
+"family.label.father" = "아버지";
+"family.label.mother" = "어머니";
+"family.label.individual" = "개인";
+"family.label.spouse" = "배우자";
+"family.label.married" = "기혼";
+"family.message.no_parents" = "기록된 부모가 없습니다.";
+"family.message.no_children" = "기록된 자녀가 없습니다.";
+
+/* Person summaries */
+"person.unknown_name" = "알 수 없음";
+"person.birth_summary" = "출생: %@";
+"person.death_summary" = "사망: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "개인 세부 정보";
+"individual.info.none" = "추가 정보를 사용할 수 없습니다.";
+"individual.notes.additional" = "추가 메모";
+"individual.notes.title" = "메모";
+"individual.section.summary" = "요약";
+"individual.section.timeline" = "타임라인";
+"individual.summary.full_name" = "전체 이름";
+"individual.summary.given_name" = "이름";
+"individual.summary.surname" = "성";
+"individual.summary.gender" = "성별";
+"individual.gender.male" = "남성";
+"individual.gender.female" = "여성";
+"individual.gender.unknown" = "알 수 없음";
+"individual.detail.date" = "날짜";
+"individual.detail.place" = "장소";
+"individual.detail.address" = "주소";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "선택된 파일 없음";
+"open.status.sample_loaded" = "번들에서 샘플 데이터 로드됨";
+"open.status.file_loaded" = "장치 저장소에서 파일 로드됨";
+"open.status.prompt" = "시작할 파일을 선택하세요";
+"open.section.current_selection" = "현재 선택";
+"open.section.status" = "상태";
+"open.section.actions" = "작업";
+"open.action.reload" = "현재 파일 다시 로드";
+"open.action.clear" = "선택 지우기";
+
+/* Error copy */
+"error.sample.load_failed" = "샘플 데이터를 로드할 수 없습니다.";
+"error.sample.missing_file" = "번들된 GEDCOM 샘플 파일이 없습니다.";
+"error.access.unable_to_access_file" = "이전에 선택한 GEDCOM 파일에 액세스할 수 없습니다.";
+"error.provider.unavailable" = "파일을 현재 제공업체에서 사용할 수 없습니다. 제공업체 앱에서 오프라인으로 사용할 수 있도록 설정한 다음 다시 시도하세요.";
+"error.unsupported_file_type" = "지원되지 않는 파일 유형입니다. GEDCOM(.ged) 파일을 선택하세요.";
+"error.load.generic" = "GEDCOM 파일을 로드할 수 없습니다.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "선언된 문자 집합을 사용하여 GEDCOM 파일을 디코드할 수 없습니다.";
+"individual.name.unnamed" = "이름 없음";
+
+/* Event labels */
+"event.birth" = "출생";
+"event.death" = "사망";
+"event.baptism" = "침례";
+"event.christening" = "유아 세례";
+"event.adult_christening" = "성인 세례";
+"event.residence" = "거주";
+"event.occupation" = "직업";
+"event.burial" = "매장";
+"event.graduation" = "졸업";
+"event.education" = "교육";
+"event.event" = "이벤트";
+"event.marriage" = "결혼";
+
+/* Event detail labels */
+"event.detail.cause" = "원인";
+"event.detail.type" = "유형";
+"event.detail.agency" = "기관";
+"event.detail.religion" = "종교";
