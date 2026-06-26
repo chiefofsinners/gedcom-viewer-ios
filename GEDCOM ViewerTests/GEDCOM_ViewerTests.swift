@@ -94,6 +94,34 @@ struct GedcomParserEventDateTests {
         let family = try #require(parsed.families.values.first)
         #expect(family.marriage?.date == "1 Mar 1975")
     }
+
+    /// Real-world regression for the reported bug, using the Familie Anton export.
+    /// Walter Peter Bohe's death has a source citation whose recording date is
+    /// 4 Dec 2014; the actual death date is 21 Dec 1933 and must win.
+    @Test func usesEventDateNotCitationDateInAntonReferenceFile() throws {
+        let fileURL = try referenceGedcomFiles(file: #filePath)
+            .appendingPathComponent("Familie_Anton_05032026.ged")
+        let parsed = try parser.parse(data: try Data(contentsOf: fileURL))
+
+        let walter = try #require(parsed.individuals.values.first { $0.gedcomId == "I1" })
+        #expect(walter.fullName == "Walter Peter Bohe")
+        #expect(walter.birth?.date == "18 Nov 1873")
+        #expect(walter.death?.date == "21 Dec 1933")
+        // The occupation event carries only a citation recording date (20 Nov 2014),
+        // which must not surface as the occupation's own date.
+        let occupation = walter.timeline.first { $0.tag == "OCCU" }
+        #expect(occupation?.event.date == nil)
+    }
+
+    private func referenceGedcomFiles(file: StaticString) throws -> URL {
+        let repositoryRoot = URL(fileURLWithPath: "\(file)")
+            .deletingLastPathComponent() // GEDCOM ViewerTests
+            .deletingLastPathComponent() // GEDCOM Viewer
+            .deletingLastPathComponent() // Repository root
+        return repositoryRoot
+            .appendingPathComponent("Reference")
+            .appendingPathComponent("GEDCOM Files")
+    }
 }
 
 struct GedcomParserEncodingTests {

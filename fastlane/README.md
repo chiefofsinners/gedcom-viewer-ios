@@ -21,23 +21,31 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios screenshots
 ```
 
-Capture screenshots on all configured simulators
+Generate new localized screenshots
 
-### ios metadata
-
-```sh
-[bundle exec] fastlane ios metadata
-```
-
-Upload App Store metadata (no screenshots, no binary)
-
-### ios release_metadata
+### ios release_notes
 
 ```sh
-[bundle exec] fastlane ios release_metadata
+[bundle exec] fastlane ios release_notes
 ```
 
-Capture screenshots then upload everything
+Upload text metadata (release notes etc.) only - no binary, no screenshots
+
+### ios release_build
+
+```sh
+[bundle exec] fastlane ios release_build
+```
+
+Build and upload to App Store (Binary only)
+
+### ios link_build
+
+```sh
+[bundle exec] fastlane ios link_build
+```
+
+Link a specific build to the App Store version without submitting
 
 ----
 
