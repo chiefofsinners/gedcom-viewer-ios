@@ -31,6 +31,71 @@ struct GedcomParserNameTests {
     }
 }
 
+struct GedcomParserEventDateTests {
+    private let parser = GedcomParser()
+
+    @Test func ignoresSourceCitationRecordingDateForEventDate() throws {
+        let gedcom = """
+            0 HEAD
+            0 @I1@ INDI
+            1 NAME Charles /Hafner/
+            1 DEAT
+            2 DATE 21 Oct 2016
+            2 PLAC West Chester, Pa
+            2 SOUR @S49@
+            3 DATA
+            4 TEXT Charles P. Hafner Jr., 56, passed away on Friday, Oct. 21, 2016.
+            4 DATE 24 Oct 2016
+            0 TRLR
+            """
+        let parsed = try parser.parse(data: Data(gedcom.utf8))
+        let individual = try #require(parsed.individuals.values.first)
+        #expect(individual.death?.date == "21 Oct 2016")
+    }
+
+    @Test func usesEventDateWhenMultipleSourceCitationsPresent() throws {
+        let gedcom = """
+            0 HEAD
+            0 @I1@ INDI
+            1 NAME John /Doe/
+            1 DEAT
+            2 DATE 21 Jun 1977
+            2 SOUR @S1@
+            3 DATA
+            4 DATE 22 Jun 1977
+            2 SOUR @S2@
+            3 DATA
+            4 DATE 23 Jun 1977
+            0 TRLR
+            """
+        let parsed = try parser.parse(data: Data(gedcom.utf8))
+        let individual = try #require(parsed.individuals.values.first)
+        #expect(individual.death?.date == "21 Jun 1977")
+    }
+
+    @Test func ignoresSourceCitationRecordingDateForMarriageDate() throws {
+        let gedcom = """
+            0 HEAD
+            0 @F1@ FAM
+            1 MARR
+            2 DATE 1 Mar 1975
+            2 SOUR @S1@
+            3 DATA
+            4 DATE 1 Mar 1975
+            2 SOUR @S2@
+            3 DATA
+            4 DATE 2 Mar 1975
+            2 SOUR @S3@
+            3 DATA
+            4 DATE 2 Mar 1975
+            0 TRLR
+            """
+        let parsed = try parser.parse(data: Data(gedcom.utf8))
+        let family = try #require(parsed.families.values.first)
+        #expect(family.marriage?.date == "1 Mar 1975")
+    }
+}
+
 struct GedcomParserEncodingTests {
     private let parser = GedcomParser()
 

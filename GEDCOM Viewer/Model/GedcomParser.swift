@@ -90,7 +90,8 @@ final class GedcomParser {
 
             let parentTag = contexts.last?.tag
             let pointerId = parsePointer(parsed.value)
-            let currentEventBuilder = contexts.last(where: { $0.eventBuilder != nil })?.eventBuilder
+            let currentEventContext = contexts.last(where: { $0.eventBuilder != nil })
+            let currentEventBuilder = currentEventContext?.eventBuilder
 
             var handled = false
             var addedContext = false
@@ -125,8 +126,8 @@ final class GedcomParser {
 
             if !handled, let individual = currentIndividual {
                 var consumed = false
-                if let eventBuilder = currentEventBuilder {
-                    consumed = eventBuilder.handle(tag: parsed.tag, value: parsed.value, pointer: pointerId, parentTag: parentTag)
+                if let eventBuilder = currentEventBuilder, let eventContext = currentEventContext {
+                    consumed = eventBuilder.handle(tag: parsed.tag, value: parsed.value, pointer: pointerId, parentTag: parentTag, depth: parsed.level - eventContext.level)
                 }
                 if !consumed {
                     switch parsed.tag {
@@ -172,8 +173,8 @@ final class GedcomParser {
 
             if !handled, let family = currentFamily {
                 var consumed = false
-                if let eventBuilder = currentEventBuilder {
-                    consumed = eventBuilder.handle(tag: parsed.tag, value: parsed.value, pointer: pointerId, parentTag: parentTag)
+                if let eventBuilder = currentEventBuilder, let eventContext = currentEventContext {
+                    consumed = eventBuilder.handle(tag: parsed.tag, value: parsed.value, pointer: pointerId, parentTag: parentTag, depth: parsed.level - eventContext.level)
                 }
                 if !consumed {
                     switch parsed.tag {
@@ -521,17 +522,26 @@ private final class LifeEventBuilder {
         value = raw?.nilIfBlank
     }
 
-    func handle(tag: String, value: String?, pointer: String?, parentTag: String?) -> Bool {
+    /// - Parameter depth: the nesting depth of this line relative to the event tag itself
+    ///   (1 = direct child such as the event's own DATE/PLAC, 2 = a continuation of a direct
+    ///   child). Lines deeper than this belong to nested substructures such as source
+    ///   citations (SOUR > DATA > DATE) and must NOT be treated as the event's own data.
+    func handle(tag: String, value: String?, pointer: String?, parentTag: String?, depth: Int) -> Bool {
         if parentTag == "CHAN" {
             return true
         }
-        if parentTag == "NOTE", tag == "CONC" || tag == "CONT" {
+        if depth == 2, parentTag == "NOTE", tag == "CONC" || tag == "CONT" {
             appendNoteContinuation(tag: tag, value: value)
             return true
         }
-        if parentTag == "ADDR", tag == "CONC" || tag == "CONT" {
+        if depth == 2, parentTag == "ADDR", tag == "CONC" || tag == "CONT" {
             appendAddress(tag: tag, value: value)
             return true
+        }
+        if depth != 1 {
+            // Belongs to a nested substructure (e.g. a source citation); ignore it so its
+            // DATE/PLAC/NOTE do not overwrite the event's own fields.
+            return false
         }
 
         switch tag {
