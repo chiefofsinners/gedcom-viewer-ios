@@ -124,6 +124,70 @@ struct GedcomParserEventDateTests {
     }
 }
 
+struct GedcomStreamingDecodeTests {
+    private let parser = GedcomParser()
+
+    /// Lines are decoded lazily off an 8 KB header window rather than from one whole-file
+    /// string, so generate well past that boundary to confirm nothing is dropped across it.
+    @Test func parsesContentLargerThanHeaderWindow() throws {
+        var text = "0 HEAD\n1 CHAR UTF-8\n"
+        let count = 1_000
+        for index in 1...count {
+            text += "0 @I\(index)@ INDI\n1 NAME Person\(index) /Surname\(index)/\n"
+        }
+        text += "0 TRLR\n"
+
+        let data = Data(text.utf8)
+        #expect(data.count > 8_192, "Fixture should exceed the header window")
+
+        let parsed = try parser.parse(data: data)
+        let names = Set(parsed.individuals.values.map(\.fullName))
+        #expect(parsed.individuals.count == count)
+        #expect(names.contains("Person1 Surname1"))
+        #expect(names.contains("Person\(count) Surname\(count)"))
+    }
+
+    @Test func stripsUTF8ByteOrderMark() throws {
+        let data = Data([0xEF, 0xBB, 0xBF]) + Data("0 HEAD\n0 @I1@ INDI\n1 NAME Jane /Roe/\n0 TRLR\n".utf8)
+        let parsed = try parser.parse(data: data)
+        #expect(parsed.individuals.values.first?.fullName == "Jane Roe")
+    }
+
+    /// "1 CHAR ANSI" selects windows-1252; 0xE9 must decode to é, not a replacement char.
+    @Test func decodesDeclaredWindows1252Charset() throws {
+        var data = Data("0 HEAD\n1 CHAR ANSI\n0 @I1@ INDI\n1 NAME Ren".utf8)
+        data.append(0xE9)
+        data += Data("e /Beaumont/\n0 TRLR\n".utf8)
+
+        let parsed = try parser.parse(data: data)
+        #expect(parsed.individuals.values.first?.fullName == "Renée Beaumont")
+    }
+
+    @Test func decodesUTF16WithByteOrderMark() throws {
+        let text = "0 HEAD\n1 CHAR UNICODE\n0 @I1@ INDI\n1 NAME Zoë /Fär/\n0 TRLR\n"
+        var data = Data([0xFF, 0xFE])
+        for unit in Array(text.utf16) {
+            data.append(UInt8(unit & 0xFF))
+            data.append(UInt8(unit >> 8))
+        }
+
+        let parsed = try parser.parse(data: data)
+        #expect(parsed.individuals.values.first?.fullName == "Zoë Fär")
+    }
+
+    @Test(arguments: ["\n", "\r\n", "\r"])
+    func handlesEveryLineEndingStyle(terminator: String) throws {
+        let lines = ["0 HEAD", "0 @I1@ INDI", "1 NAME Ada /Byron/", "0 TRLR"]
+        let parsed = try parser.parse(data: Data(lines.joined(separator: terminator).utf8))
+        #expect(parsed.individuals.values.first?.fullName == "Ada Byron")
+    }
+
+    @Test func handlesEmptyData() throws {
+        let parsed = try parser.parse(data: Data())
+        #expect(parsed.individuals.isEmpty)
+    }
+}
+
 struct GedcomParserEncodingTests {
     private let parser = GedcomParser()
 

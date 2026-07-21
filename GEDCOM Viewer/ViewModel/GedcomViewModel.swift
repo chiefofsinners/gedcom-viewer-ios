@@ -53,7 +53,7 @@ final class GedcomViewModel: ObservableObject {
             guard let self else { return }
             do {
                 let url = try sampleURL()
-                let data = try Data(contentsOf: url)
+                let data = try Data(contentsOf: url, options: .mappedIfSafe)
                 let parsed = try await parse(data: data, sourceIdentifier: Sample.sourceIdentifier)
                 cachedData = parsed
                 currentSource = .sample
@@ -551,7 +551,9 @@ private extension GedcomViewModel {
             // Many third‑party providers report a path but the file isn't staged locally yet.
             throw GedcomError.providerUnavailable
         }
-        return try Data(contentsOf: url)
+        // Mapped so the raw bytes stay file-backed and evictable; the parser streams them
+        // line by line, so a large file never has to be resident all at once.
+        return try Data(contentsOf: url, options: .mappedIfSafe)
     }
 
     // Coordinated read helps third‑party file providers (e.g., Google Drive) stage the file for reading.
@@ -564,7 +566,7 @@ private extension GedcomViewModel {
         coordinator.coordinate(with: [intent], queue: fileCoordinationQueue) { _ in
             do {
                 // After coordination, attempt to read again.
-                resultData = try Data(contentsOf: intent.url)
+                resultData = try Data(contentsOf: intent.url, options: .mappedIfSafe)
             } catch {
                 readError = error
             }

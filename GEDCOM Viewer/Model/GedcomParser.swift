@@ -36,7 +36,7 @@ final class GedcomParser {
     }
 
     func parse(data: Data, sourceIdentifier: String? = nil) throws -> GedcomData {
-        let contents = try textDecoder.decode(data)
+        let lines = try textDecoder.lines(in: data)
 
         let scope = IdentifierScope(rawSourceIdentifier: sourceIdentifier)
 
@@ -49,13 +49,12 @@ final class GedcomParser {
         var currentNoteRecord: NoteRecordBuilder?
         var contexts: [Context] = []
 
-        contents.split(maxSplits: .max, omittingEmptySubsequences: false, whereSeparator: \.isNewline).forEach { rawSubstring in
-            let rawLine = String(rawSubstring)
+        for rawLine in lines {
             let trimmedLine = rawLine.trimmingCharacters(in: .whitespacesAndNewlines)
-            if trimmedLine.isEmpty { return }
+            if trimmedLine.isEmpty { continue }
 
             let sanitized = trimmedLine.hasPrefix("\u{feff}") ? String(trimmedLine.dropFirst()) : trimmedLine
-            guard let parsed = parseLine(sanitized) else { return }
+            guard let parsed = parseLine(sanitized) else { continue }
 
             while let last = contexts.last, last.level >= parsed.level {
                 contexts.removeLast()
@@ -85,7 +84,7 @@ final class GedcomParser {
                 }
 
                 contexts = [Context(level: parsed.level, tag: parsed.tag, eventBuilder: nil)]
-                return
+                continue
             }
 
             let parentTag = contexts.last?.tag

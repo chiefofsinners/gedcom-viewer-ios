@@ -9,25 +9,37 @@ import Foundation
 
 /// Decodes raw GEDCOM data to Unicode, respecting the character set declared in the file header.
 struct GedcomTextDecoder {
-    private let anselDecoder = AnselDecoder()
+    fileprivate let anselDecoder = AnselDecoder()
 
-    func decode(_ data: Data) throws -> String {
-        guard !data.isEmpty else { return "" }
-
-        let bom = ByteOrderMark(data: data)
-        let declaredCharset = declaredCharset(in: data)
-
-        let strategies = decodingStrategies(bom: bom, declared: declaredCharset)
-        for strategy in strategies {
-            if let decoded = decode(data, using: strategy) {
-                return decoded
-            }
+    /// Produces the file's lines lazily instead of decoding the whole buffer up front.
+    ///
+    /// The character set is chosen from the header prefix (BOM + `1 CHAR`), which is all
+    /// the previous whole-buffer decode needed to pick a strategy; every line after that is
+    /// decoded only as the parser asks for it. Combined with memory-mapped reads this keeps
+    /// peak memory proportional to the data we keep rather than the file size — GEDCOM files
+    /// can embed large base64 media blobs we never retain.
+    func lines(in data: Data) throws -> GedcomLineSequence {
+        guard !data.isEmpty else {
+            return GedcomLineSequence(data: Data(), startOffset: 0, layout: .singleByte, strategies: [], decoder: self)
         }
 
-        throw GedcomParserError.invalidEncoding
+        let bom = ByteOrderMark(data: data)
+        let strategies = decodingStrategies(bom: bom, declared: declaredCharset(in: data))
+        guard let primary = strategies.first else { throw GedcomParserError.invalidEncoding }
+
+        // Line breaks are found at the byte level, so the fallback chain has to stay within
+        // strategies of the same code-unit width as the one we scan with.
+        let layout = primary.layout
+        return GedcomLineSequence(
+            data: data,
+            startOffset: bom?.byteCount ?? 0,
+            layout: layout,
+            strategies: strategies.filter { $0.layout == layout },
+            decoder: self
+        )
     }
 
-    private func decode(_ data: Data, using strategy: DecodingStrategy) -> String? {
+    fileprivate func decode(_ data: Data, using strategy: DecodingStrategy) -> String? {
         switch strategy {
         case .utf8:
             return String(data: data, encoding: .utf8)
@@ -75,6 +87,105 @@ struct GedcomTextDecoder {
     }
 }
 
+// MARK: - Lazy line decoding
+
+/// Walks the raw bytes a line at a time, decoding each line independently.
+struct GedcomLineSequence: Sequence {
+    fileprivate let data: Data
+    fileprivate let startOffset: Int
+    fileprivate let layout: CodeUnitLayout
+    fileprivate let strategies: [DecodingStrategy]
+    fileprivate let decoder: GedcomTextDecoder
+
+    func makeIterator() -> Iterator {
+        Iterator(
+            data: data,
+            offset: Swift.min(startOffset, data.count),
+            layout: layout,
+            strategies: strategies,
+            decoder: decoder
+        )
+    }
+
+    struct Iterator: IteratorProtocol {
+        fileprivate let data: Data
+        fileprivate var offset: Int
+        fileprivate let layout: CodeUnitLayout
+        fileprivate let strategies: [DecodingStrategy]
+        fileprivate let decoder: GedcomTextDecoder
+
+        mutating func next() -> String? {
+            let count = data.count
+            guard offset < count else { return nil }
+
+            let lineStart = offset
+            let width = layout.byteWidth
+            let bigEndian = layout.isBigEndian
+            let bounds = data.withUnsafeBytes { raw -> (end: Int, next: Int) in
+                let bytes = raw.bindMemory(to: UInt8.self)
+                func unit(at index: Int) -> UInt16 {
+                    guard width == 2 else { return UInt16(bytes[index]) }
+                    let first = UInt16(bytes[index])
+                    let second = UInt16(bytes[index + 1])
+                    return bigEndian ? (first << 8) | second : (second << 8) | first
+                }
+
+                var cursor = lineStart
+                while cursor + width <= count {
+                    switch unit(at: cursor) {
+                    case 0x0A:
+                        return (cursor, cursor + width)
+                    case 0x0D:
+                        // Swallow the LF of a CR/LF pair so it doesn't yield a blank line.
+                        var following = cursor + width
+                        if following + width <= count, unit(at: following) == 0x0A {
+                            following += width
+                        }
+                        return (cursor, following)
+                    default:
+                        cursor += width
+                    }
+                }
+                return (count, count)
+            }
+
+            offset = bounds.next
+            let base = data.startIndex
+            return decode(data[(base + lineStart)..<(base + bounds.end)])
+        }
+
+        private func decode(_ line: Data) -> String {
+            for strategy in strategies {
+                if let decoded = decoder.decode(line, using: strategy) {
+                    return decoded
+                }
+            }
+            // Nothing claimed the line; a lossy read beats losing the record entirely.
+            return String(decoding: line, as: UTF8.self)
+        }
+    }
+}
+
+/// How wide a code unit is in the raw bytes, and how to read one.
+enum CodeUnitLayout: Hashable {
+    case singleByte
+    case utf16(bigEndian: Bool)
+
+    fileprivate var byteWidth: Int {
+        switch self {
+        case .singleByte: return 1
+        case .utf16: return 2
+        }
+    }
+
+    fileprivate var isBigEndian: Bool {
+        switch self {
+        case .singleByte: return false
+        case .utf16(let bigEndian): return bigEndian
+        }
+    }
+}
+
 // MARK: - Declared charset bookkeeping
 
 private enum DecodingStrategy: Hashable {
@@ -86,6 +197,18 @@ private enum DecodingStrategy: Hashable {
     case ascii
     case macOSRoman
     case ansel
+
+    /// The code-unit width this strategy reads, which determines how line breaks are found.
+    var layout: CodeUnitLayout {
+        switch self {
+        case .utf16LittleEndian:
+            return .utf16(bigEndian: false)
+        case .utf16BigEndian:
+            return .utf16(bigEndian: true)
+        default:
+            return .singleByte
+        }
+    }
 
     static let defaultFallbacks: [DecodingStrategy] = [
         .utf8,
@@ -112,6 +235,16 @@ private enum ByteOrderMark {
             self = .utf16BigEndian
         } else {
             return nil
+        }
+    }
+
+    /// Length of the mark itself, skipped before the first line is read.
+    var byteCount: Int {
+        switch self {
+        case .utf8:
+            return 3
+        case .utf16LittleEndian, .utf16BigEndian:
+            return 2
         }
     }
 
