@@ -73,6 +73,16 @@ struct HomeTabView: View {
     }
 }
 
+extension HomeTabView: Equatable {
+    /// Compares only the state this view's body reads, so unrelated changes such as
+    /// the current selection no longer rebuild it. The action closures are excluded
+    /// because they are recreated on every ContentView body pass; see the matching
+    /// comment on `IndexTabView`. Used via `.equatable()`.
+    static func == (lhs: HomeTabView, rhs: HomeTabView) -> Bool {
+        lhs.state.isLoading == rhs.state.isLoading && lhs.state.error == rhs.state.error
+    }
+}
+
 private enum HomeLayout {
     static let bottomInset: CGFloat = 24
 }

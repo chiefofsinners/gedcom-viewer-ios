@@ -13,6 +13,9 @@ struct ContentView: View {
     @State private var importerError: IdentifiableError?
     @State private var familyScrollResetToken = UUID()
     @State private var pendingErrorClearTask: Task<Void, Never>?
+    /// True between a load completing and the destination tab actually being on
+    /// screen, so the loading overlay can cover that gap. See `onChange` below.
+    @State private var isAwaitingLoadTab = false
 
     private var isPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
@@ -75,16 +78,17 @@ struct ContentView: View {
                                     }
                                 }
                             )
+                            .equatable()
                         case .index:
                             NavigationStack {
                                 IndexTabView(
                                     state: viewModel.state,
                                     onSelectIndividual: { id in
-                                        familyScrollResetToken = UUID()
                                         viewModel.selectIndividual(id)
                                         updateSelectedTab(.family)
                                     }
                                 )
+                                .equatable()
                             }
                         case .family:
                             FamilyTabView(
@@ -113,6 +117,7 @@ struct ContentView: View {
                             }
                         }
                     )
+                    .equatable()
                     .tag(AppTab.home)
                     .tabItem { Label("tab.home.title", systemImage: "house") }
 
@@ -120,11 +125,11 @@ struct ContentView: View {
                         IndexTabView(
                             state: viewModel.state,
                             onSelectIndividual: { id in
-                                familyScrollResetToken = UUID()
                                 viewModel.selectIndividual(id)
                                 updateSelectedTab(.family)
                             }
                         )
+                        .equatable()
                     }
                     .tag(AppTab.index)
                     .tabItem { Label("tab.index.title", systemImage: "list.bullet") }
@@ -144,10 +149,14 @@ struct ContentView: View {
                 //.toolbarBackground(.visible, for: .tabBar)
             }
 
-            LoadingOverlay()
-                .opacity(viewModel.state.isLoading ? 1 : 0)
-                .allowsHitTesting(viewModel.state.isLoading)
-                .zIndex(2)
+            // Mounted only while loading: a ProgressView kept in the hierarchy at
+            // zero opacity still animates, which keeps CoreAnimation committing
+            // frames for the whole session. Appearance is unanimated either way,
+            // so this matches the previous behaviour on screen.
+            if viewModel.state.isLoading || isAwaitingLoadTab {
+                LoadingOverlay()
+                    .zIndex(2)
+            }
         }
         .onAppear {
             applyTabBarAppearanceIfNeeded(with: themeManager.colors)
@@ -190,6 +199,7 @@ struct ContentView: View {
             if newTab == .family {
                 familyScrollResetToken = UUID()
             }
+            isAwaitingLoadTab = false
             previousTab = newTab
         }
         .onChange(of: viewModel.state.lastSuccessfulLoadID) { token in
@@ -197,6 +207,13 @@ struct ContentView: View {
             let tab = tabAfterLoad
             if tab == .family {
                 familyScrollResetToken = UUID()
+            }
+            // The switch below only takes effect on the next render pass, so hold the
+            // overlay until it lands rather than trusting a fixed delay to outlast it.
+            // Guarded on an actual change: if the tab is already correct nothing will
+            // fire `onChange(of: selectedTab)` to clear this again.
+            if tab != selectedTab {
+                isAwaitingLoadTab = true
             }
             updateSelectedTab(tab, animated: false)
         }

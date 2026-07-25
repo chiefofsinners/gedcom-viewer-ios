@@ -28,10 +28,26 @@ final class GedcomViewModel: ObservableObject {
     /// True while restoring the source saved from a previous launch, so the
     /// remembered individual can be reopened instead of landing on the index.
     private var isRestoringSavedSource = false
+    /// When the loading overlay went up, so a fast parse can still show it long
+    /// enough not to strobe. See `finishLoading()`.
+    private var loadingStartedAt: CFAbsoluteTime?
+
+    /// Shortest time the loading overlay stays on screen once shown, so a fast parse
+    /// doesn't flash it.
+    private static let minimumLoadingOverlayDuration: TimeInterval = 0.25
+
+    /// Shortest time the overlay stays up *after* the data lands. ContentView moves to
+    /// the index in response to `lastSuccessfulLoadID`, and that `onChange` takes effect
+    /// a render after the data is published — so clearing `isLoading` in the same batch
+    /// uncovers the Home tab for a frame. This holds the overlay across that gap.
+    private static let postLoadOverlayHold: TimeInterval = 0.20
 
     private func updateState(_ transform: (inout GedcomUIState) -> Void) {
         var newState = state
         transform(&newState)
+        if newState.isLoading != state.isLoading {
+            loadingStartedAt = newState.isLoading ? CFAbsoluteTimeGetCurrent() : nil
+        }
         state = newState
     }
 
@@ -412,8 +428,30 @@ final class GedcomViewModel: ObservableObject {
         }
     }
 
+    /// Drops the loading overlay once the data is ready, holding it long enough to
+    /// cover both the anti-flash minimum and the tab switch that follows. This used to
+    /// wait a flat 0.5s that every load paid on top of however long parsing took.
     private func finishLoading() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.50) { [weak self] in
+        let remaining: TimeInterval
+        if let startedAt = loadingStartedAt {
+            let shownFor = CFAbsoluteTimeGetCurrent() - startedAt
+            remaining = max(
+                Self.postLoadOverlayHold,
+                Self.minimumLoadingOverlayDuration - shownFor
+            )
+        } else {
+            // Never showed the overlay (e.g. refresh), so there is nothing to cover.
+            remaining = 0
+        }
+
+        guard remaining > 0 else {
+            updateState { state in
+                state.isLoading = false
+            }
+            return
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + remaining) { [weak self] in
             self?.updateState { state in
                 state.isLoading = false
             }
@@ -670,7 +708,7 @@ private extension GedcomViewModel {
     }
 }
 
-struct GedcomUIState {
+struct GedcomUIState: Equatable {
     var isLoading: Bool = false
     var data: GedcomData?
     var error: String?

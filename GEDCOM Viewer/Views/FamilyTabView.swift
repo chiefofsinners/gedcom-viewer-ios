@@ -36,7 +36,7 @@ struct FamilyTabView: View {
                     )
                 )
             } else if let data = state.data {
-                if data.individualsSortedByName.isEmpty {
+                if data.individuals.isEmpty {
                     PlaceholderView(
                         message: String(
                             localized: "family.placeholder.no_individuals",

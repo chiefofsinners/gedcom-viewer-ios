@@ -32,23 +32,13 @@ struct IndexTabView: View {
         return name
     }
 
+    /// Recomputed on every `body` pass, so it must stay cheap: it reuses the
+    /// sections `GedcomData` built once at parse time and only prunes them.
     private var filteredSections: [IndividualSection] {
         guard !state.isLoading, let data = state.data else { return [] }
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        let individuals: [Individual]
-        if query.isEmpty {
-            individuals = data.individualsSortedByName
-        } else {
-            individuals = data.individualsSortedByName.filter { individual in
-                let displayName = individual.displayName.lowercased()
-                let surname = individual.surname?.lowercased()
-                let givenName = individual.givenName?.lowercased()
-                return displayName.contains(query) ||
-                    (surname?.contains(query) ?? false) ||
-                    (givenName?.contains(query) ?? false)
-            }
-        }
-        return IndividualSection.build(from: individuals)
+        guard !query.isEmpty else { return data.indexSections }
+        return IndividualSection.filter(data.indexSections) { $0.matches(searchQuery: query) }
     }
 
     var colors: GVThemeColors {
@@ -69,23 +59,6 @@ struct IndexTabView: View {
 
     var layoutVerticalPadding: CGFloat {
         listVerticalPadding(isPhone: isPhone, isPortraitPhone: isPortraitPhone)
-    }
-
-    // Forces List to rebuild when the displayed dataset changes.
-    private var listIdentityKey: Int {
-        var hasher = Hasher()
-        hasher.combine(searchText)
-        if let data = state.data {
-            for section in IndividualSection.build(from: data.individualsSortedByName) {
-                hasher.combine(section.title)
-                for member in section.members {
-                    hasher.combine(member.id)
-                }
-            }
-        } else {
-            hasher.combine(0)
-        }
-        return hasher.finalize()
     }
 
     var body: some View {
@@ -260,6 +233,24 @@ struct IndexTabView: View {
 
 }
 
+extension IndexTabView: Equatable {
+    /// Compares only the state this view's body actually reads. Selecting a person
+    /// changes `selectedIndividualId`, which the index does not display; without
+    /// this, every selection rebuilt the whole list. Used via `.equatable()`.
+    ///
+    /// `onSelectIndividual` is deliberately excluded — it is a fresh closure on
+    /// every ContentView body pass, so comparing it would never report equality.
+    /// Holding the previous closure is safe: it writes through `@State`/`@StateObject`
+    /// storage, not through the captured struct copy.
+    static func == (lhs: IndexTabView, rhs: IndexTabView) -> Bool {
+        lhs.state.isLoading == rhs.state.isLoading
+            && lhs.state.needsFileSelection == rhs.state.needsFileSelection
+            && lhs.state.currentFileName == rhs.state.currentFileName
+            && lhs.state.lastSuccessfulLoadID == rhs.state.lastSuccessfulLoadID
+            && lhs.state.data == rhs.state.data
+    }
+}
+
 enum LayoutMetrics {
     static let sectionHeaderHeight: CGFloat = 44
     static let defaultListHorizontalPadding: CGFloat = 32
@@ -307,46 +298,6 @@ struct ScrollDestination {
     var prefersAnimation: Bool {
         //!isFirstSection
         true
-    }
-}
-
-struct IndividualSection: Identifiable {
-    let title: Character
-    let members: [Individual]
-    var id: Character { title }
-
-    static func build(from individuals: [Individual]) -> [IndividualSection] {
-        guard !individuals.isEmpty else { return [] }
-        var sections: [IndividualSection] = []
-        let sorted = individuals.sorted { lhs, rhs in
-            let lhsLetter = lhs.indexLetter
-            let rhsLetter = rhs.indexLetter
-            if lhsLetter != rhsLetter { return lhsLetter < rhsLetter }
-            let lhsSurname = lhs.surname?.lowercased() ?? lhs.displayName.lowercased()
-            let rhsSurname = rhs.surname?.lowercased() ?? rhs.displayName.lowercased()
-            if lhsSurname != rhsSurname { return lhsSurname < rhsSurname }
-            let lhsGiven = lhs.givenName?.lowercased() ?? ""
-            let rhsGiven = rhs.givenName?.lowercased() ?? ""
-            if lhsGiven != rhsGiven { return lhsGiven < rhsGiven }
-            return lhs.displayName.lowercased() < rhs.displayName.lowercased()
-        }
-        var currentLetter: Character?
-        var currentMembers: [Individual] = []
-        func flush() {
-            guard let letter = currentLetter, !currentMembers.isEmpty else { return }
-            sections.append(IndividualSection(title: letter, members: currentMembers))
-            currentMembers.removeAll(keepingCapacity: true)
-        }
-        for individual in sorted {
-            let letter = individual.indexLetter
-            if letter != currentLetter {
-                flush()
-                currentLetter = letter
-            }
-            currentMembers.append(individual)
-        }
-        flush()
-        return sections
     }
 }
 
@@ -410,13 +361,6 @@ private extension DisplayState {
     }
     var showsContent: Bool {
         self == .content
-    }
-}
-
-fileprivate extension View {
-    // Forces a full view rebuild by keying the content on a dynamic value.
-    func contentKey<T: Hashable>(_ key: T) -> some View {
-        self.id(key)
     }
 }
 
