@@ -25,6 +25,9 @@ final class GedcomViewModel: ObservableObject {
 
     private var cachedData: GedcomData?
     private var currentSource: DocumentSource?
+    /// True while restoring the source saved from a previous launch, so the
+    /// remembered individual can be reopened instead of landing on the index.
+    private var isRestoringSavedSource = false
 
     private func updateState(_ transform: (inout GedcomUIState) -> Void) {
         var newState = state
@@ -58,6 +61,8 @@ final class GedcomViewModel: ObservableObject {
                 cachedData = parsed
                 currentSource = .sample
                 save(mode: .sample, bookmark: nil, fileName: Sample.fileName)
+                let restored = restoredSelection(for: parsed)
+                let reopensRestored = consumeSavedSourceRestoration(restored: restored)
                 updateState { state in
                     state.data = parsed
                     state.error = nil
@@ -65,10 +70,12 @@ final class GedcomViewModel: ObservableObject {
                     state.currentFileName = Sample.fileName
                     state.isSampleData = true
                     state.lastSuccessfulLoadID = UUID()
-                    state.selectedIndividualId = nil
+                    state.selectedIndividualId = restored
+                    state.reopensLastViewedIndividual = reopensRestored
                 }
                 finishLoading()
             } catch {
+                _ = consumeSavedSourceRestoration(restored: nil)
                 if previousState.data == nil {
                     clearSavedSource()
                 }
@@ -161,6 +168,9 @@ final class GedcomViewModel: ObservableObject {
                     currentSource = nil
                     clearSavedSource()
                 }
+                // Re-picking the same file keeps its remembered individual so the
+                // Family tab still has context, but browsing always lands on the index.
+                let restored = restoredSelection(for: parsed)
                 updateState { state in
                     state.data = parsed
                     state.error = nil
@@ -168,7 +178,8 @@ final class GedcomViewModel: ObservableObject {
                     state.currentFileName = displayName
                     state.isSampleData = false
                     state.lastSuccessfulLoadID = UUID()
-                    state.selectedIndividualId = nil
+                    state.selectedIndividualId = restored
+                    state.reopensLastViewedIndividual = false
                 }
                 finishLoading()
             } catch {
@@ -218,6 +229,8 @@ final class GedcomViewModel: ObservableObject {
                     let parsed = try await loadFromSecurityScopedURL(url)
                     cachedData = parsed
                     currentSource = .file(bookmarkData: bookmark, fileName: fileName)
+                    // Drop the selection if the reloaded file no longer contains that person.
+                    let selection = parsed.individual(id: previousState.selectedIndividualId)?.id
                     updateState { state in
                         state.data = parsed
                         state.error = nil
@@ -225,6 +238,7 @@ final class GedcomViewModel: ObservableObject {
                         state.currentFileName = fileName
                         state.isSampleData = false
                         state.lastSuccessfulLoadID = UUID()
+                        state.selectedIndividualId = selection
                     }
                     finishLoading()
                 } catch {
@@ -276,17 +290,52 @@ final class GedcomViewModel: ObservableObject {
         currentSource = nil
         state = GedcomUIState()
         clearSavedSource()
+        clearSavedIndividual()
     }
 
     func selectIndividual(_ id: String?) {
         updateState { state in
             state.selectedIndividualId = id
+            state.reopensLastViewedIndividual = false
         }
+        persistSelection(id)
+    }
+
+    /// Remembers the individual being viewed so the next launch can reopen them.
+    /// Stored alongside the data's source id so a different file never restores a stale person.
+    private func persistSelection(_ id: String?) {
+        guard let sourceId = state.data?.sourceId ?? cachedData?.sourceId else { return }
+        guard let id = id?.nilIfBlank else {
+            clearSavedIndividual()
+            return
+        }
+        defaults.set(id, forKey: Keys.lastIndividualId)
+        defaults.set(sourceId, forKey: Keys.lastIndividualSourceId)
+    }
+
+    /// The previously viewed individual, if the saved record belongs to this data and still exists.
+    private func restoredSelection(for data: GedcomData) -> String? {
+        guard defaults.string(forKey: Keys.lastIndividualSourceId) == data.sourceId,
+              let id = defaults.string(forKey: Keys.lastIndividualId) else {
+            return nil
+        }
+        return data.individual(id: id)?.id
+    }
+
+    /// Ends the launch restoration window and reports whether this load should reopen
+    /// the remembered individual rather than showing the index.
+    private func consumeSavedSourceRestoration(restored: String?) -> Bool {
+        let wasRestoring = isRestoringSavedSource
+        isRestoringSavedSource = false
+        return wasRestoring && restored != nil
     }
 
     private func loadSavedSource() {
+        isRestoringSavedSource = true
+
         guard let modeString = defaults.string(forKey: Keys.lastMode),
               let mode = SavedMode(rawValue: modeString) else {
+            isRestoringSavedSource = false
             cachedData = nil
             currentSource = nil
             updateState { state in
@@ -303,6 +352,7 @@ final class GedcomViewModel: ObservableObject {
         case .file:
             guard let bookmark = defaults.data(forKey: Keys.lastBookmark),
                   let fileName = defaults.string(forKey: Keys.lastFileName) else {
+                isRestoringSavedSource = false
                 cachedData = nil
                 currentSource = nil
                 updateState { state in
@@ -329,6 +379,8 @@ final class GedcomViewModel: ObservableObject {
                     let parsed = try await loadFromSecurityScopedURL(url)
                     cachedData = parsed
                     currentSource = .file(bookmarkData: bookmark, fileName: fileName)
+                    let restored = restoredSelection(for: parsed)
+                    let reopensRestored = consumeSavedSourceRestoration(restored: restored)
                     updateState { state in
                         state.data = parsed
                         state.error = nil
@@ -336,9 +388,12 @@ final class GedcomViewModel: ObservableObject {
                         state.currentFileName = fileName
                         state.isSampleData = false
                         state.lastSuccessfulLoadID = UUID()
+                        state.selectedIndividualId = restored
+                        state.reopensLastViewedIndividual = reopensRestored
                     }
                     finishLoading()
                 } catch {
+                    _ = consumeSavedSourceRestoration(restored: nil)
                     clearSavedSource()
                     cachedData = nil
                     currentSource = nil
@@ -432,6 +487,11 @@ final class GedcomViewModel: ObservableObject {
         defaults.removeObject(forKey: Keys.lastMode)
         defaults.removeObject(forKey: Keys.lastBookmark)
         defaults.removeObject(forKey: Keys.lastFileName)
+    }
+
+    private func clearSavedIndividual() {
+        defaults.removeObject(forKey: Keys.lastIndividualId)
+        defaults.removeObject(forKey: Keys.lastIndividualSourceId)
     }
 
     // Repairs stale bookmarks by creating and saving a fresh one when needed.
@@ -537,6 +597,8 @@ final class GedcomViewModel: ObservableObject {
         static let lastMode = "gedcomviewer.lastMode"
         static let lastBookmark = "gedcomviewer.lastBookmark"
         static let lastFileName = "gedcomviewer.lastFileName"
+        static let lastIndividualId = "gedcomviewer.lastIndividualId"
+        static let lastIndividualSourceId = "gedcomviewer.lastIndividualSourceId"
     }
 }
 
@@ -617,4 +679,7 @@ struct GedcomUIState {
     var isSampleData: Bool = false
     var lastSuccessfulLoadID: UUID?
     var selectedIndividualId: String?
+    /// Set when a launch restore reopened the individual viewed last time, so the
+    /// UI can open on the Family tab instead of the index.
+    var reopensLastViewedIndividual: Bool = false
 }

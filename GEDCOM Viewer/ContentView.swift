@@ -26,6 +26,12 @@ struct ContentView: View {
         return version.minorVersion <= 5
     }
 
+    /// Reopening the file saved from a previous launch jumps straight back to the
+    /// person who was on screen last time; any other load starts at the index.
+    private var tabAfterLoad: AppTab {
+        viewModel.state.reopensLastViewedIndividual ? .family : .index
+    }
+
     private var allowedContentTypes: [UTType] {
         var types: [UTType] = [.data, .text]
         if let gedType = UTType(filenameExtension: "ged") {
@@ -161,7 +167,7 @@ struct ContentView: View {
         .onChange(of: viewModel.state.data) { data in
             guard data != nil else { return }
             if !viewModel.state.needsFileSelection && viewModel.state.error == nil {
-                updateSelectedTab(.index, animated: false)
+                updateSelectedTab(tabAfterLoad, animated: false)
             }
         }
         .onChange(of: selectedTab) { newTab in
@@ -188,7 +194,11 @@ struct ContentView: View {
         }
         .onChange(of: viewModel.state.lastSuccessfulLoadID) { token in
             guard token != nil else { return }
-            updateSelectedTab(.index, animated: false)
+            let tab = tabAfterLoad
+            if tab == .family {
+                familyScrollResetToken = UUID()
+            }
+            updateSelectedTab(tab, animated: false)
         }
         .fileImporter(
             isPresented: $showingFileImporter,
