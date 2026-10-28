@@ -21,7 +21,15 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios screenshots
 ```
 
-Generate new localized screenshots
+Generate new localized screenshots on every device and upload them
+
+### ios device_screenshots
+
+```sh
+[bundle exec] fastlane ios device_screenshots
+```
+
+Capture screenshots on the Snapfile's devices and the iPhone Duo, in every Snapfile language (no upload)
 
 ### ios duo_screenshots
 
@@ -29,7 +37,7 @@ Generate new localized screenshots
 [bundle exec] fastlane ios duo_screenshots
 ```
 
-Capture iPhone Duo (inner display) screenshots in every Snapfile language, no upload
+Capture iPhone Duo screenshots only (no upload)
 
 ### ios release_notes
 
