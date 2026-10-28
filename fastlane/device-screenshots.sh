@@ -44,7 +44,11 @@ for spec in "$@"; do
   print "== $device $folder"
   for attempt in 1 2; do
     xcrun simctl boot $udid 2>/dev/null; xcrun simctl bootstatus $udid -b >/dev/null 2>&1
-    (( is_duo )) && { open_portrait || { print -u2 "could not unfold the Duo"; continue; }; }
+    # A Duo sometimes won't unfold after a long idle; a reboot brings it back.
+    if (( is_duo )) && ! open_portrait; then
+      xcrun simctl shutdown $udid 2>/dev/null; xcrun simctl boot $udid; xcrun simctl bootstatus $udid -b >/dev/null 2>&1
+      open_portrait || { print -u2 "could not unfold the Duo"; continue; }
+    fi
     xcrun simctl uninstall $udid $bundle_id 2>/dev/null
     xcrun simctl status_bar $udid override --time 9:41 --dataNetwork wifi --wifiMode active \
       --wifiBars 3 --cellularMode active --cellularBars 4 --batteryState discharging --batteryLevel 100
