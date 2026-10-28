@@ -6,15 +6,18 @@ struct FamilyTabView: View {
     let state: GedcomUIState
     let onSelectIndividual: (String?) -> Void
     let scrollResetToken: UUID
+    /// The people stepped through from the root, and the root itself. ContentView owns
+    /// them so they survive this view being rebuilt when the window switches between one
+    /// pane and two.
+    @Binding var path: [FamilyRoute]
+    @Binding var rootIndividualId: String?
 
     @Environment(\.colorScheme) private var colorScheme
-    @State private var path: [FamilyRoute] = []
     @State private var suppressSelectionReset = false
     @State private var suppressPathChange = false
     @State private var pendingPathRestoration = false
     @State private var suppressingRootPlaceholder = false
     @State private var placeholderSuppressionTask: Task<Void, Never>?
-    @State private var rootIndividualId: String?
     private var stackContent: some View {
         Group {
             if state.isLoading && state.data == nil {
@@ -195,7 +198,7 @@ struct FamilyTabView: View {
 
 }
 
-private enum FamilyRoute: Hashable {
+enum FamilyRoute: Hashable {
     case family(String)
 
     var individualId: String {

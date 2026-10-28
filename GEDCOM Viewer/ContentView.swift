@@ -5,6 +5,7 @@ import UIKit
 struct ContentView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
     @StateObject private var viewModel: GedcomViewModel
     @StateObject private var themeManager = GVThemeManager()
     @State private var selectedTab: AppTab
@@ -16,13 +17,27 @@ struct ContentView: View {
     /// True between a load completing and the destination tab actually being on
     /// screen, so the loading overlay can cover that gap. See `onChange` below.
     @State private var isAwaitingLoadTab = false
+    // Held here rather than in the index and family views, which are rebuilt whenever
+    // the window switches between one pane and two (folding an iPhone Duo, resizing an
+    // iPad window), so that switching keeps the search, scroll position and family history.
+    @State private var indexBrowseState = IndexBrowseState()
+    @State private var familyPath: [FamilyRoute] = []
+    @State private var familyRootId: String?
 
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
+    /// iPad, and iPhone Duo opened out: regular in both directions gets the tab bar
+    /// along the top. Decided by size class, not device, so it follows folding.
+    private var usesTopTabBar: Bool {
+        horizontalSizeClass == .regular && verticalSizeClass == .regular
+    }
+
+    /// With a file loaded, a window that gets the top tab bar shows the index and family
+    /// side by side (split on the fold of an iPhone Duo) instead of as separate tabs.
+    private var showsPanes: Bool {
+        usesTopTabBar && selectedTab != .home && viewModel.state.data != nil
     }
 
     private var shouldApplyUIKitTabBarAppearance: Bool {
-        guard !isPad else { return false }
+        guard UIDevice.current.userInterfaceIdiom != .pad else { return false }
         let version = ProcessInfo.processInfo.operatingSystemVersion
         if version.majorVersion <= 18 { return true }
         if version.majorVersion > 18 { return false }
@@ -56,48 +71,32 @@ struct ContentView: View {
         let colors = themeManager.colors
 
         ZStack {
-            if isPad {
-                // iPad: Use custom tab bar at the top
+            if showsPanes {
+                // Index and family side by side. As on Android, the tab bar belongs to the
+                // index pane and drops Family, which is already on screen.
+                ListDetailPanes {
+                    VStack(spacing: 0) {
+                        topTabBar(colors: colors)
+                        indexTab(highlightedIndividualId: familyRootId)
+                    }
+                } detailPane: {
+                    familyTab
+                }
+                .background(colors.background)
+                .edgesIgnoringSafeArea(.bottom)
+            } else if usesTopTabBar {
+                // Regular width and height: use custom tab bar at the top
                 VStack(spacing: 0) {
-                    CustomTabBar(selectedTab: $selectedTab, colors: colors)
-                        .padding(.top, 12)
-                        .padding(.bottom, 6)
-                        .background(colors.tabBackground)
-                        .zIndex(1)
+                    topTabBar(colors: colors)
 
                     Group {
                         switch selectedTab {
                         case .home:
-                            HomeTabView(
-                                state: viewModel.state,
-                                onBrowseFiles: { showingFileImporter = true },
-                                onLoadSample: { viewModel.loadSample() },
-                                onOpenIndex: {
-                                    if viewModel.openSavedIndex() {
-                                        updateSelectedTab(.index)
-                                    }
-                                }
-                            )
-                            .equatable()
+                            homeTab
                         case .index:
-                            NavigationStack {
-                                IndexTabView(
-                                    state: viewModel.state,
-                                    onSelectIndividual: { id in
-                                        viewModel.selectIndividual(id)
-                                        updateSelectedTab(.family)
-                                    }
-                                )
-                                .equatable()
-                            }
+                            indexTab()
                         case .family:
-                            FamilyTabView(
-                                state: viewModel.state,
-                                onSelectIndividual: { id in
-                                    viewModel.selectIndividual(id)
-                                },
-                                scrollResetToken: familyScrollResetToken
-                            )
+                            familyTab
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -105,44 +104,19 @@ struct ContentView: View {
                 .background(colors.background)
                 .edgesIgnoringSafeArea(.bottom)
             } else {
-                // iPhone: Use native TabView with system tab bar
+                // Compact width or height: use native TabView with system tab bar
                 TabView(selection: $selectedTab) {
-                    HomeTabView(
-                        state: viewModel.state,
-                        onBrowseFiles: { showingFileImporter = true },
-                        onLoadSample: { viewModel.loadSample() },
-                        onOpenIndex: {
-                            if viewModel.openSavedIndex() {
-                                updateSelectedTab(.index)
-                            }
-                        }
-                    )
-                    .equatable()
-                    .tag(AppTab.home)
-                    .tabItem { Label("tab.home.title", systemImage: "house") }
+                    homeTab
+                        .tag(AppTab.home)
+                        .tabItem { Label("tab.home.title", systemImage: "house") }
 
-                    NavigationStack {
-                        IndexTabView(
-                            state: viewModel.state,
-                            onSelectIndividual: { id in
-                                viewModel.selectIndividual(id)
-                                updateSelectedTab(.family)
-                            }
-                        )
-                        .equatable()
-                    }
-                    .tag(AppTab.index)
-                    .tabItem { Label("tab.index.title", systemImage: "list.bullet") }
+                    indexTab()
+                        .tag(AppTab.index)
+                        .tabItem { Label("tab.index.title", systemImage: "list.bullet") }
 
-                    FamilyTabView(
-                        state: viewModel.state,
-                        onSelectIndividual: { id in
-                            viewModel.selectIndividual(id)
-                        },
-                        scrollResetToken: familyScrollResetToken
-                    )
-                    .tag(AppTab.family)
-                    .tabItem { Label("tab.family.title", systemImage: "person.2") }
+                    familyTab
+                        .tag(AppTab.family)
+                        .tabItem { Label("tab.family.title", systemImage: "person.2") }
                 }
                 .tint(colors.accent)
                 //.toolbarBackground(colors.tabBackground, for: .tabBar)
@@ -239,6 +213,62 @@ struct ContentView: View {
             )
         }
         .environmentObject(themeManager)
+    }
+
+    private var homeTab: some View {
+        HomeTabView(
+            state: viewModel.state,
+            onBrowseFiles: { showingFileImporter = true },
+            onLoadSample: { viewModel.loadSample() },
+            onOpenIndex: {
+                if viewModel.openSavedIndex() {
+                    updateSelectedTab(.index)
+                }
+            }
+        )
+        .equatable()
+    }
+
+    private func indexTab(highlightedIndividualId: String? = nil) -> some View {
+        NavigationStack {
+            IndexTabView(
+                state: viewModel.state,
+                browseState: indexBrowseState,
+                highlightedIndividualId: highlightedIndividualId,
+                onSelectIndividual: { id in
+                    viewModel.selectIndividual(id)
+                    // Beside the index the family tab is usually selected already, so the
+                    // scroll back to the top that switching to it brings would not happen.
+                    if selectedTab == .family {
+                        familyScrollResetToken = UUID()
+                    }
+                    updateSelectedTab(.family)
+                }
+            )
+            .equatable()
+        }
+    }
+
+    private var familyTab: some View {
+        FamilyTabView(
+            state: viewModel.state,
+            onSelectIndividual: { id in
+                viewModel.selectIndividual(id)
+            },
+            scrollResetToken: familyScrollResetToken,
+            path: $familyPath,
+            rootIndividualId: $familyRootId
+        )
+    }
+
+    /// Home and Index only: wherever this bar appears, a file's family view sits beside
+    /// the index rather than on a tab of its own.
+    private func topTabBar(colors: GVThemeColors) -> some View {
+        CustomTabBar(selectedTab: $selectedTab, tabs: [.home, .index], colors: colors)
+            .padding(.top, 12)
+            .padding(.bottom, 6)
+            .background(colors.tabBackground)
+            .zIndex(1)
     }
 
     /// Applies theming to the UITabBar on iPhone.
@@ -381,12 +411,18 @@ private struct IdentifiableError: Identifiable {
 private struct CustomTabBar: View {
     @Environment(\.colorScheme) private var colorScheme
     @Binding var selectedTab: AppTab
+    let tabs: [AppTab]
     let colors: GVThemeColors
+
+    /// A selected tab that is not offered here (Family, beside the index) shows as Index.
+    private var displayedTab: AppTab {
+        tabs.contains(selectedTab) ? selectedTab : .index
+    }
 
     var body: some View {
         HStack(spacing: 12) {
-            ForEach(AppTab.allCases, id: \.self) { tab in
-                let isSelected = selectedTab == tab
+            ForEach(tabs, id: \.self) { tab in
+                let isSelected = displayedTab == tab
                 let unselectedColor: Color = colorScheme == .light ? .primary : colors.tabUnselectedForeground
                 Button(action: { selectedTab = tab }) {
                     HStack(spacing: 6) {
@@ -412,6 +448,7 @@ private struct CustomTabBar: View {
                 }
                 .foregroundColor(isSelected ? colors.tabSelectedForeground : unselectedColor)
                 .buttonStyle(.plain)
+                .accessibilityIdentifier("tabbar.\(tab).button")
             }
         }
         .padding(.horizontal, 16)

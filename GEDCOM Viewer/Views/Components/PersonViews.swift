@@ -8,11 +8,14 @@ struct PersonRowView: View {
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     let individual: Individual
     let supportingText: String?
+    /// Marks the person shown in the family pane beside the index.
+    let isHighlighted: Bool
     let onTap: () -> Void
 
-    init(individual: Individual, supportingText: String? = nil, onTap: @escaping () -> Void) {
+    init(individual: Individual, supportingText: String? = nil, isHighlighted: Bool = false, onTap: @escaping () -> Void) {
         self.individual = individual
         self.supportingText = supportingText?.nilIfBlank
+        self.isHighlighted = isHighlighted
         self.onTap = onTap
     }
 
@@ -38,35 +41,30 @@ struct PersonRowView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, horizontalPadding)
             .padding(.vertical, verticalPadding)
-            .background(colors.background)
+            .background(isHighlighted ? colors.surface : colors.background)
             //.frame(height: 90)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityIdentifier("index.person.\(individual.gedcomId)")
-        .listRowBackground(colors.background)
+        .accessibilityAddTraits(isHighlighted ? .isSelected : [])
+        .listRowBackground(isHighlighted ? colors.surface : colors.background)
     }
 
     private var horizontalPadding: CGFloat {
         PersonRowLayout.horizontalPadding(
-            isPhone: isPhone,
             isPortraitPhone: isPortraitPhone
         )
     }
 
     private var verticalPadding: CGFloat {
         PersonRowLayout.verticalPadding(
-            isPhone: isPhone,
             isPortraitPhone: isPortraitPhone
         )
     }
 
-    private var isPhone: Bool {
-        UIDevice.current.userInterfaceIdiom == .phone
-    }
-
     private var isPortraitPhone: Bool {
-        isPhone && horizontalSizeClass == .compact && verticalSizeClass == .regular
+        horizontalSizeClass == .compact && verticalSizeClass == .regular
     }
 }
 
@@ -156,19 +154,13 @@ enum PersonRowLayout {
     static let compactPhoneHorizontalPadding: CGFloat = 0
     static let compactPhoneVerticalPadding: CGFloat = 4
 
-    static func horizontalPadding(isPhone: Bool, isPortraitPhone: Bool) -> CGFloat {
-        guard isPhone else {
-            return defaultHorizontalPadding
-        }
+    static func horizontalPadding(isPortraitPhone: Bool) -> CGFloat {
         return isPortraitPhone
             ? compactPhoneHorizontalPadding
             : defaultHorizontalPadding
     }
 
-    static func verticalPadding(isPhone: Bool, isPortraitPhone: Bool) -> CGFloat {
-        guard isPhone else {
-            return defaultVerticalPadding
-        }
+    static func verticalPadding(isPortraitPhone: Bool) -> CGFloat {
         return isPortraitPhone
             ? compactPhoneVerticalPadding
             : defaultVerticalPadding

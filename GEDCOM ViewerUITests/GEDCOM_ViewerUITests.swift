@@ -48,8 +48,10 @@ final class GEDCOM_ViewerUITests: XCTestCase {
 
         targetRow.tap()
 
+        // One pane switches to the Family tab; two panes (iPad, unfolded iPhone Duo) fill
+        // the family pane beside the index. Either way the info button appears.
         let familyInfoButton = app.buttons["family.info.button"]
-        XCTAssertTrue(familyInfoButton.waitForExistence(timeout: 10), "Family tab info button missing")
+        XCTAssertTrue(familyInfoButton.waitForExistence(timeout: 10), "Family info button missing")
 
         snapshot("04-family")
 
@@ -67,10 +69,21 @@ final class GEDCOM_ViewerUITests: XCTestCase {
     }
 
     private func ensureHomeTabIsSelected(in app: XCUIApplication) {
+        // The app may reopen the last file, landing on the index rather than Home.
+        if app.buttons["home.load_sample.button"].waitForExistence(timeout: 3) { return }
+
+        // Regular width and height (iPad, iPhone Duo opened out) uses the app's own top bar.
+        let customHomeButton = app.buttons["tabbar.home.button"]
+        if customHomeButton.exists {
+            customHomeButton.tap()
+            return
+        }
+
+        // The system tab bar: along the bottom, or since iOS 27.1 a vertical bar at the
+        // side (folded iPhone Duo), which isn't reported as a tab bar. Home is first in both.
         let tabBar = app.tabBars.firstMatch
-        guard tabBar.waitForExistence(timeout: 5) else { return }
-        let homeButton = tabBar.buttons.element(boundBy: 0)
-        guard homeButton.waitForExistence(timeout: 1) else { return }
+        let homeButton = tabBar.exists ? tabBar.buttons.element(boundBy: 0) : app.buttons["house"]
+        guard homeButton.waitForExistence(timeout: 2) else { return }
         if !homeButton.isSelected {
             homeButton.tap()
         }

@@ -49,6 +49,16 @@ extension IndexTabView {
                 .onChange(of: resetToken) { _ in
                     scrollToTop(proxy, sections: sections)
                 }
+                .onAppear {
+                    let target = browseState.listAppeared(owner: browseOwner, sections: sections)
+                    // A turn later, so the list has its rows before scrolling to one.
+                    DispatchQueue.main.async {
+                        if let target {
+                            scroll(to: .individual(target), in: sections, proxy: proxy, animated: false)
+                        }
+                        browseState.finishRestoring(owner: browseOwner)
+                    }
+                }
             }
         }
     }
@@ -92,10 +102,12 @@ extension IndexTabView {
                         let isLastMemberOverall = isLastSection && isLastMemberInSection
                         PersonRowView(
                             individual: individual,
-                            supportingText: individual.birthSummary
+                            supportingText: individual.birthSummary,
+                            isHighlighted: individual.id == highlightedIndividualId
                         ) {
                             selectIndividual(individual.id)
                         }
+                        .tracksVisibility(of: individual.id, in: browseState, owner: browseOwner)
                         .frame(maxWidth: .infinity,
                                minHeight: LayoutMetrics.personRowHeight,
                                alignment: .topLeading)
@@ -132,11 +144,14 @@ extension IndexTabView {
                     ForEach(section.members, id: \.id) { individual in
                         PersonRowView(
                             individual: individual,
-                            supportingText: individual.birthSummary
+                            supportingText: individual.birthSummary,
+                            isHighlighted: individual.id == highlightedIndividualId
                         ) {
                             selectIndividual(individual.id)
                         }
+                        .tracksVisibility(of: individual.id, in: browseState, owner: browseOwner)
                         .frame(maxWidth: .infinity, alignment: .topLeading)
+                        .id(ScrollTarget.individual(individual.id))
                     }
                 } header: {
                     SectionHeader(letter: section.title)
@@ -315,4 +330,13 @@ extension IndexTabView {
         return offsets
     }
     
+}
+
+private extension View {
+    /// Reports the row coming on and off screen, so the scroll position can be restored
+    /// when the index is rebuilt.
+    func tracksVisibility(of id: String, in browseState: IndexBrowseState, owner: UUID) -> some View {
+        onAppear { browseState.rowAppeared(id, owner: owner) }
+            .onDisappear { browseState.rowDisappeared(id, owner: owner) }
+    }
 }

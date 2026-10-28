@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 import SwiftUI
 import UIKit
@@ -7,14 +8,25 @@ struct IndexTabView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
     let state: GedcomUIState
+    @ObservedObject var browseState: IndexBrowseState
+    /// The person shown in the family pane beside the index, when there is one.
+    let highlightedIndividualId: String?
     let onSelectIndividual: (String) -> Void
 
-    @State private var searchText: String = ""
     @State private var scrollResetToken = UUID()
     @State private var lastAppliedLoadID: UUID?
+    /// Identifies this list to `browseState`, which outlives it.
+    @State var browseOwner = UUID()
 
-    init(state: GedcomUIState, onSelectIndividual: @escaping (String) -> Void) {
+    init(
+        state: GedcomUIState,
+        browseState: IndexBrowseState,
+        highlightedIndividualId: String? = nil,
+        onSelectIndividual: @escaping (String) -> Void
+    ) {
         self.state = state
+        self.browseState = browseState
+        self.highlightedIndividualId = highlightedIndividualId
         self.onSelectIndividual = onSelectIndividual
     }
 
@@ -36,7 +48,7 @@ struct IndexTabView: View {
     /// sections `GedcomData` built once at parse time and only prunes them.
     private var filteredSections: [IndividualSection] {
         guard !state.isLoading, let data = state.data else { return [] }
-        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let query = browseState.searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         guard !query.isEmpty else { return data.indexSections }
         return IndividualSection.filter(data.indexSections) { $0.matches(searchQuery: query) }
     }
@@ -45,20 +57,16 @@ struct IndexTabView: View {
         themeManager.colors
     }
 
-    private var isPhone: Bool {
-        UIDevice.current.userInterfaceIdiom == .phone
-    }
-
     private var isPortraitPhone: Bool {
-        isPhone && horizontalSizeClass == .compact && verticalSizeClass == .regular
+        horizontalSizeClass == .compact && verticalSizeClass == .regular
     }
 
     var layoutHorizontalPadding: CGFloat {
-        listHorizontalPadding(isPhone: isPhone, isPortraitPhone: isPortraitPhone)
+        listHorizontalPadding(isPortraitPhone: isPortraitPhone)
     }
 
     var layoutVerticalPadding: CGFloat {
-        listVerticalPadding(isPhone: isPhone, isPortraitPhone: isPortraitPhone)
+        listVerticalPadding(isPortraitPhone: isPortraitPhone)
     }
 
     var body: some View {
@@ -99,12 +107,12 @@ struct IndexTabView: View {
             guard let token, token != lastAppliedLoadID else { return }
             lastAppliedLoadID = token
             withAnimation(.none) {
-                searchText = ""
+                browseState.searchText = ""
                 scrollResetToken = UUID()
             }
         }
         .onChange(of: state.currentFileName) { _ in
-            searchText = ""
+            browseState.searchText = ""
             lastAppliedLoadID = nil
         }
         .onAppear {
@@ -120,14 +128,14 @@ struct IndexTabView: View {
         HStack(spacing: 10) {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(colors.supportingText.opacity(0.9))
-            TextField("index.search.placeholder", text: $searchText)
+            TextField("index.search.placeholder", text: $browseState.searchText)
                 .font(.title3)
                 .autocorrectionDisabled()
                 .accessibilityIdentifier("index.search.field")
                 .focused($searchFocused)
-            if !searchText.isEmpty {
+            if !browseState.searchText.isEmpty {
                 Button {
-                    searchText = ""
+                    browseState.searchText = ""
                 } label: {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundStyle(colors.supportingText.opacity(0.9))
@@ -243,11 +251,80 @@ extension IndexTabView: Equatable {
     /// Holding the previous closure is safe: it writes through `@State`/`@StateObject`
     /// storage, not through the captured struct copy.
     static func == (lhs: IndexTabView, rhs: IndexTabView) -> Bool {
-        lhs.state.isLoading == rhs.state.isLoading
+        lhs.browseState === rhs.browseState
+            && lhs.highlightedIndividualId == rhs.highlightedIndividualId
+            && lhs.state.isLoading == rhs.state.isLoading
             && lhs.state.needsFileSelection == rhs.state.needsFileSelection
             && lhs.state.currentFileName == rhs.state.currentFileName
             && lhs.state.lastSuccessfulLoadID == rhs.state.lastSuccessfulLoadID
             && lhs.state.data == rhs.state.data
+    }
+}
+
+/// The index's search text and scroll position. ContentView owns it so that both outlive
+/// the `IndexTabView` itself, which is rebuilt whenever the window switches between one
+/// pane and two: folding or unfolding an iPhone Duo, or resizing an iPad window.
+@MainActor
+final class IndexBrowseState: ObservableObject {
+    @Published var searchText = ""
+
+    // The scroll position is kept as the rows last on screen, not an offset, so it still
+    // means something in a list of a different size. None of it is published: tracking
+    // it must not redraw the list.
+    private var visibleRows: [UUID: Set<String>] = [:]
+    private var lastVisibleRows = Set<String>()
+    private var currentOwner: UUID?
+    private var isRestoring = false
+    private var snapshotScheduled = false
+
+    func rowAppeared(_ id: String, owner: UUID) {
+        visibleRows[owner, default: []].insert(id)
+        scheduleSnapshot()
+    }
+
+    func rowDisappeared(_ id: String, owner: UUID) {
+        visibleRows[owner]?.remove(id)
+        if visibleRows[owner]?.isEmpty == true {
+            visibleRows[owner] = nil
+        }
+        scheduleSnapshot()
+    }
+
+    /// Called when a list comes on screen. Returns the row to scroll a newly built list
+    /// to, and nil for one that is merely reappearing, such as on a tab switch.
+    func listAppeared(owner: UUID, sections: [IndividualSection]) -> String? {
+        guard owner != currentOwner else { return nil }
+        currentOwner = owner
+        isRestoring = true
+        guard !lastVisibleRows.isEmpty else { return nil }
+        for section in sections {
+            if let member = section.members.first(where: { lastVisibleRows.contains($0.id) }) {
+                return member.id
+            }
+        }
+        return nil
+    }
+
+    func finishRestoring(owner: UUID) {
+        guard owner == currentOwner else { return }
+        isRestoring = false
+        scheduleSnapshot()
+    }
+
+    private func scheduleSnapshot() {
+        guard !snapshotScheduled else { return }
+        snapshotScheduled = true
+        // Coalesced to the end of the run loop turn: a list being torn down drops all of
+        // its rows at once, and must not wipe out the position it had.
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.snapshotScheduled = false
+            guard !self.isRestoring,
+                  let owner = self.currentOwner,
+                  let rows = self.visibleRows[owner],
+                  !rows.isEmpty else { return }
+            self.lastVisibleRows = rows
+        }
     }
 }
 
@@ -267,19 +344,13 @@ enum LayoutMetrics {
     static let personRowHeight: CGFloat = 52
 }
 
-private func listHorizontalPadding(isPhone: Bool, isPortraitPhone: Bool) -> CGFloat {
-    guard isPhone else {
-        return LayoutMetrics.defaultListHorizontalPadding
-    }
+private func listHorizontalPadding(isPortraitPhone: Bool) -> CGFloat {
     return isPortraitPhone
         ? LayoutMetrics.compactPhoneListHorizontalPadding
         : LayoutMetrics.defaultListHorizontalPadding
 }
 
-private func listVerticalPadding(isPhone: Bool, isPortraitPhone: Bool) -> CGFloat {
-    guard isPhone else {
-        return LayoutMetrics.defaultListVerticalPadding
-    }
+private func listVerticalPadding(isPortraitPhone: Bool) -> CGFloat {
     return isPortraitPhone
         ? LayoutMetrics.compactPhoneListVerticalPadding
         : LayoutMetrics.defaultListVerticalPadding
@@ -307,24 +378,18 @@ struct SectionHeader: View {
 
     let letter: Character
 
-    private var isPhone: Bool {
-        UIDevice.current.userInterfaceIdiom == .phone
-    }
-
     private var isPortraitPhone: Bool {
-        isPhone && horizontalSizeClass == .compact && verticalSizeClass == .regular
+        horizontalSizeClass == .compact && verticalSizeClass == .regular
     }
 
     private var horizontalPadding: CGFloat {
         PersonRowLayout.horizontalPadding(
-            isPhone: isPhone,
             isPortraitPhone: isPortraitPhone
         )
     }
 
     private var verticalPadding: CGFloat {
         PersonRowLayout.verticalPadding(
-            isPhone: isPhone,
             isPortraitPhone: isPortraitPhone
         )
     }
@@ -404,6 +469,7 @@ struct IndexTabView_Previews: PreviewProvider {
             NavigationStack {
                 IndexTabView(
                     state: state,
+                    browseState: IndexBrowseState(),
                     onSelectIndividual: { _ in }
                 )
             }
@@ -413,6 +479,7 @@ struct IndexTabView_Previews: PreviewProvider {
             NavigationStack {
                 IndexTabView(
                     state: state,
+                    browseState: IndexBrowseState(),
                     onSelectIndividual: { _ in }
                 )
             }
