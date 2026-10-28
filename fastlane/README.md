@@ -23,6 +23,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Generate new localized screenshots
 
+### ios duo_screenshots
+
+```sh
+[bundle exec] fastlane ios duo_screenshots
+```
+
+Capture iPhone Duo (inner display) screenshots in every Snapfile language, no upload
+
 ### ios release_notes
 
 ```sh

@@ -167,10 +167,12 @@ open class Snapshot: NSObject {
                 return
             }
 
-            let screenshot = XCUIScreen.main.screenshot()
+            let screenshot = screenshotOfAppScreen()
             #if os(iOS) && !targetEnvironment(macCatalyst)
-            let image = XCUIDevice.shared.orientation.isLandscape ?  fixLandscapeOrientation(image: screenshot.image) : screenshot.image
+            let needsRotation = XCUIDevice.shared.orientation.isLandscape
+            let image = needsRotation ?  fixLandscapeOrientation(image: screenshot.image) : screenshot.image
             #else
+            let needsRotation = false
             let image = screenshot.image
             #endif
 
@@ -186,12 +188,60 @@ open class Snapshot: NSObject {
                 #if swift(<5.0)
                     try UIImagePNGRepresentation(image)?.write(to: path, options: .atomic)
                 #else
-                    try image.pngData()?.write(to: path, options: .atomic)
+                    // Unrotated, write the screenshot's own PNG: going through UIImage rounds
+                    // a display with a fractional point size (iPhone Duo, 2007 pixels) down a pixel.
+                    if !needsRotation {
+                        try padToDuoInnerDisplay(screenshot.pngRepresentation).write(to: path, options: .atomic)
+                    } else {
+                        try image.pngData()?.write(to: path, options: .atomic)
+                    }
                 #endif
             } catch let error {
                 NSLog("Problem writing screenshot: \(name) to \(screenshotsDir)/\(simulator)-\(name).png")
                 NSLog(error.localizedDescription)
             }
+        #endif
+    }
+
+    /// The screen the app is on. A device with more than one display (iPhone Duo) reports its
+    /// outer display as `XCUIScreen.main`, which is switched off while the device is open, so
+    /// take the screen whose size matches the app's window.
+    class func screenshotOfAppScreen() -> XCUIScreenshot {
+        let screens = XCUIScreen.screens
+        guard screens.count > 1, let app = app else { return XCUIScreen.main.screenshot() }
+        let window = app.windows.firstMatch.frame.size
+        for screen in screens {
+            let shot = screen.screenshot()
+            let size = shot.image.size
+            if (abs(size.width - window.width) < 1 && abs(size.height - window.height) < 1)
+                || (abs(size.width - window.height) < 1 && abs(size.height - window.width) < 1) {
+                return shot
+            }
+        }
+        return XCUIScreen.main.screenshot()
+    }
+
+    /// XCTest captures the iPhone Duo's inner display a pixel short (2006x2852) of the
+    /// 2007x2853 App Store Connect requires; repeat the last column and row to make it up.
+    class func padToDuoInnerDisplay(_ png: Data) -> Data {
+        #if os(iOS) && !targetEnvironment(macCatalyst)
+        guard let source = UIImage(data: png)?.cgImage,
+              source.width == 2006, source.height == 2852 else { return png }
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 2007, height: 2853), format: format)
+        let padded = renderer.image { context in
+            let cg = context.cgContext
+            cg.interpolationQuality = .none
+            // UIKit's context is flipped relative to Core Graphics; draw through UIImage.
+            let image = UIImage(cgImage: source, scale: 1, orientation: .up)
+            for (dx, dy) in [(1, 1), (1, 0), (0, 1), (0, 0)] {
+                image.draw(at: CGPoint(x: dx, y: dy))
+            }
+        }
+        return padded.pngData() ?? png
+        #else
+        return png
         #endif
     }
 
