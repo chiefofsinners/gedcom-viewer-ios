@@ -178,6 +178,12 @@ struct ContentView: View {
         }
         .onChange(of: viewModel.state.lastSuccessfulLoadID) { token in
             guard token != nil else { return }
+            // A new file: what these hold belongs to the old one. The index and family
+            // views reset themselves only if they are on screen when it loads, which
+            // beside each other they may not be (loading from Home).
+            familyPath = []
+            familyRootId = viewModel.state.selectedIndividualId
+            indexBrowseState.reset()
             let tab = tabAfterLoad
             if tab == .family {
                 familyScrollResetToken = UUID()

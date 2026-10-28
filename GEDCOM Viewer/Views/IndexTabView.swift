@@ -277,6 +277,13 @@ final class IndexBrowseState: ObservableObject {
     private var isRestoring = false
     private var snapshotScheduled = false
 
+    /// Forgets the search and scroll position, for a newly loaded file.
+    func reset() {
+        searchText = ""
+        visibleRows = [:]
+        lastVisibleRows = []
+    }
+
     func rowAppeared(_ id: String, owner: UUID) {
         visibleRows[owner, default: []].insert(id)
         scheduleSnapshot()
