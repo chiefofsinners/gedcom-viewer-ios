@@ -1,0 +1,124 @@
+/* General actions */
+"general.ok" = "אישור";
+"general.done" = "סיום";
+"general.close" = "סגירה";
+
+/* Tab titles */
+"tab.home.title" = "בית";
+"tab.index.title" = "אינדקס";
+"tab.family.title" = "משפחה";
+
+/* Alerts */
+"alert.import_failure.title" = "לא ניתן לפתוח את הקובץ";
+
+/* Home tab */
+"home.header.title" = "בחירת קובץ GEDCOM";
+"home.header.subtitle" = "בחרו קובץ GEDCOM מקומי כדי לעיין באילן היוחסין שלו.";
+"home.action.browse" = "עיון בקבצים";
+"home.action.load_sample" = "טעינת נתונים לדוגמה";
+"home.action.settings" = "הגדרות";
+
+/* Settings */
+"settings.title" = "הגדרות";
+"settings.sections.appearance" = "מראה";
+"settings.theme.label" = "ערכת נושא";
+"settings.theme.option_accessibility" = "ערכת הנושא %@";
+
+/* Theme names */
+"theme.earth" = "אדמה";
+"theme.silver" = "כסף";
+
+/* Index tab */
+"index.search.placeholder" = "חיפוש לפי שם";
+"index.search.clear_accessibility" = "ניקוי טקסט החיפוש";
+"index.placeholder.empty_results" = "לא נמצאו אנשים.";
+
+/* Generic placeholders */
+"placeholder.no_selection" = "לא נטענו נתוני GEDCOM. בחרו קובץ במסך הבית.";
+"placeholder.no_data" = "אין נתוני GEDCOM זמינים.";
+
+/* Family tab placeholders */
+"family.placeholder.loading" = "טוען נתוני GEDCOM…";
+"family.placeholder.select_from_home" = "בחרו קובץ GEDCOM בלשונית הבית כדי לעיין בפרטי המשפחה.";
+"family.placeholder.no_individuals" = "אין אנשים בנתוני GEDCOM אלה.";
+"family.placeholder.select_from_index" = "בחרו אדם מהאינדקס כדי לראות את הקשרים שלו.";
+
+/* Family view copy */
+"family.error.not_found" = "האדם לא נמצא.";
+"family.accessibility.individual_details" = "פרטי האדם";
+"family.section.parents" = "הורים";
+"family.section.family" = "משפחה";
+"family.label.father" = "אב";
+"family.label.mother" = "אם";
+"family.label.individual" = "אדם";
+"family.label.spouse" = "בן/בת זוג";
+"family.label.married" = "נישואים";
+"family.message.no_parents" = "לא נרשמו הורים.";
+"family.message.no_children" = "לא נרשמו ילדים.";
+
+/* Person summaries */
+"person.unknown_name" = "לא ידוע";
+"person.birth_summary" = "נולד/ה: %@";
+"person.death_summary" = "נפטר/ה: %@";
+
+/* Individual detail sheet */
+"individual.header.title" = "פרטי האדם";
+"individual.info.none" = "אין מידע נוסף.";
+"individual.notes.additional" = "הערות נוספות";
+"individual.notes.title" = "הערות";
+"individual.section.summary" = "סיכום";
+"individual.section.timeline" = "ציר זמן";
+"individual.summary.full_name" = "שם מלא";
+"individual.summary.given_name" = "שם פרטי";
+"individual.summary.surname" = "שם משפחה";
+"individual.summary.gender" = "מגדר";
+"individual.gender.male" = "זכר";
+"individual.gender.female" = "נקבה";
+"individual.gender.unknown" = "לא ידוע";
+"individual.detail.date" = "תאריך";
+"individual.detail.place" = "מקום";
+"individual.detail.address" = "כתובת";
+"individual.timeline.label_with_value" = "%@: %@";
+
+/* Open tab */
+"open.file.none_selected" = "לא נבחר קובץ";
+"open.status.sample_loaded" = "נתוני הדוגמה נטענו מהיישום";
+"open.status.file_loaded" = "הקובץ נטען מאחסון המכשיר";
+"open.status.prompt" = "בחרו קובץ כדי להתחיל";
+"open.section.current_selection" = "הבחירה הנוכחית";
+"open.section.status" = "מצב";
+"open.section.actions" = "פעולות";
+"open.action.reload" = "טעינה מחדש של הקובץ הנוכחי";
+"open.action.clear" = "ניקוי הבחירה";
+
+/* Error copy */
+"error.sample.load_failed" = "לא ניתן לטעון את נתוני הדוגמה.";
+"error.sample.missing_file" = "קובץ ה-GEDCOM לדוגמה חסר ביישום.";
+"error.access.unable_to_access_file" = "לא ניתן לגשת לקובץ ה-GEDCOM שנבחר קודם.";
+"error.provider.unavailable" = "הקובץ אינו זמין כרגע אצל הספק שלו. הפכו אותו לזמין במצב לא מקוון ביישום הספק ונסו שוב.";
+"error.unsupported_file_type" = "סוג קובץ לא נתמך. בחרו קובץ GEDCOM (‎.ged).";
+"error.load.generic" = "לא ניתן לטעון את קובץ ה-GEDCOM.";
+
+/* Parser and model strings */
+"parser.error.invalid_encoding" = "לא ניתן לפענח את קובץ ה-GEDCOM בקידוד התווים שהוצהר בו.";
+"individual.name.unnamed" = "ללא שם";
+
+/* Event labels */
+"event.birth" = "לידה";
+"event.death" = "פטירה";
+"event.baptism" = "טבילה";
+"event.christening" = "הטבלה";
+"event.adult_christening" = "הטבלה בבגרות";
+"event.residence" = "מגורים";
+"event.occupation" = "עיסוק";
+"event.burial" = "קבורה";
+"event.graduation" = "סיום לימודים";
+"event.education" = "השכלה";
+"event.event" = "אירוע";
+"event.marriage" = "נישואים";
+
+/* Event detail labels */
+"event.detail.cause" = "סיבה";
+"event.detail.type" = "סוג";
+"event.detail.agency" = "גוף";
+"event.detail.religion" = "דת";

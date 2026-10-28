@@ -249,6 +249,7 @@
 				nl,
 				uk,
 				sl,
+				he,
 			);
 			mainGroup = D88416C32E9D22EE00035873;
 			minimizedProjectReferenceProxies = 1;
